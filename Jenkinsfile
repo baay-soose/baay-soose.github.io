@@ -63,25 +63,20 @@ pipeline {
         stage('Check Chrome') {
             steps {
                 echo 'Vérification de l\'installation de Chrome...'
-                bat '''
-                    where chrome || where google-chrome || echo "Chrome non trouvé dans le PATH"
+                script {
+                    try {
+                        bat 'where chrome'
+                        echo 'Chrome trouvé dans le PATH'
+                    } catch (Exception e) {
+                        echo 'Chrome non trouvé dans le PATH - Vérification des emplacements standards...'
+                    }
                     
-                    if exist "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" (
-                        echo "Chrome trouvé dans Program Files"
-                    ) else (
-                        echo "Chrome non trouvé - Les tests Selenium pourraient échouer"
-                    )
-                '''
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                echo 'Installation des dépendances...'
-                bat '''
-                    npm install || exit 0
-                    npm install chromedriver@latest --save-dev || exit 0
-                '''
+                    if (fileExists('C:/Program Files/Google/Chrome/Application/chrome.exe')) {
+                        echo 'Chrome trouvé dans Program Files'
+                    } else {
+                        echo 'Chrome non trouvé - Les tests Selenium pourraient échouer'
+                    }
+                }
             }
         }
 

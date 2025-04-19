@@ -6,6 +6,8 @@ pipeline {
         DEPLOY_ENV = 'production'
         TEST_PORT = '8081'
         CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application'
+        
+        CHROMEDRIVER_PATH = '%CD%\\node_modules\\.bin'
     }
 
     stages {
@@ -121,8 +123,7 @@ pipeline {
                 echo 'Exécution des tests Selenium...'
                 bat '''
                     rem Ajouter Chrome et ChromeDriver au PATH pour cette session
-                    set PATH=%CHROME_PATH%;%PATH%
-                    set PATH=%CD%\\node_modules\\.bin;%PATH%
+                    set PATH=%CHROME_PATH%;%CHROMEDRIVER_PATH%;%PATH%
                     
                     rem Définir le port pour les tests
                     set TEST_PORT=8081
@@ -135,14 +136,9 @@ pipeline {
                     node tests/selenium/runAllTests.js || echo "Tests Selenium terminés"
                 '''
             }
-            post {
-                always {
-                    junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'screenshots/**/*.png'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'test-results/*.txt'
-                }
-            }
         }
+    }
+}
 
         stage('Build for Production') {
             steps {

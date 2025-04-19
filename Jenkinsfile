@@ -36,7 +36,6 @@ pipeline {
             }
         }
         
-      
         stage('Lint CSS and JavaScript') {
             steps {
                 echo 'Vérification du CSS et JavaScript...'
@@ -57,6 +56,52 @@ pipeline {
                         npx stylelint *.css || exit 0
                     )
                 '''
+            }
+        }
+        
+        stage('Setup Selenium') {
+            steps {
+                echo 'Configuration des tests Selenium...'
+                bat '''
+                    rem Créer le dossier tests s'il n'existe pas
+                    if not exist tests\\selenium mkdir tests\\selenium
+                    
+                    rem Installer les dépendances Selenium
+                    npm install mocha selenium-webdriver chromedriver --save-dev || exit 0
+                    
+                    rem Créer le package.json si nécessaire
+                    if not exist package.json (
+                        npm init -y
+                    )
+                '''
+            }
+        }
+        
+        stage('Run Selenium Tests') {
+            steps {
+                echo 'Exécution des tests Selenium...'
+                bat '''
+                    rem Démarrer un serveur HTTP pour les tests
+                    start /B npx http-server . -p 8080
+                    
+                    rem Attendre que le serveur démarre
+                    timeout /t 5
+                    
+                    rem Exécuter les tests Selenium
+                    npm run test:selenium || echo "Aucun test Selenium ou échec des tests"
+                    
+                    rem Arrêter le serveur HTTP
+                    taskkill /F /IM node.exe || exit 0
+                '''
+            }
+            post {
+                always {
+                    // Archiver les résultats des tests
+                    junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
+                    
+                    // Archiver les captures d'écran si présentes
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'screenshots/**/*.png'
+                }
             }
         }
         

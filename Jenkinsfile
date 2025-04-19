@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        nodejs 'NodeJS-16'  // Nom configuré dans Global Tool Configuration
+        nodejs 'NodeJS'  // Nom configuré dans Global Tool Configuration
     }
     
     environment {

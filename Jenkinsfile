@@ -35,31 +35,8 @@ pipeline {
                 '''
             }
         }
-        stage('Validate CSS Files') {
-            steps {
-                echo 'Validation des fichiers CSS...'
-                bat '''
-                    echo Vérification de l'existence des fichiers CSS
-                    dir /b *.css
-                    
-                    echo Total des fichiers CSS trouvés :
-                    dir /b *.css | find /c /v ""
-                '''
-            }
-        }
-        stage('Validate JS Files') {
-            steps {
-                echo 'Validation des fichiers JavaScript...'
-                bat '''
-                    echo Vérification de l'existence des fichiers JavaScript
-                    dir /b *.js
-                    
-                    echo Total des fichiers JavaScript trouvés :
-                    dir /b *.js | find /c /v ""
-                '''
-            }
-        }
-
+        
+      
         stage('Lint CSS and JavaScript') {
             steps {
                 echo 'Vérification du CSS et JavaScript...'

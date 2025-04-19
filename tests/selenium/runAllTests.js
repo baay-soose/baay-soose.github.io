@@ -5,30 +5,26 @@ const fs = require('fs');
 const config = require('./config');
 const { spawn } = require('child_process');
 
-// Configuration de Mocha avec logging amélioré
+// Configuration de Mocha
 const mochaOptions = {
     timeout: config.timeout,
-    reporter: 'spec',  // Utiliser spec pour voir plus de détails
-    reporterOptions: {
-        output: 'test-results/selenium-output.txt'  // Capturer aussi la sortie console
-    },
+    reporter: config.reporters.junit ? 'mocha-junit-reporter' : 'spec',
+    reporterOptions: config.reporters.junit ? {
+        mochaFile: config.reporters.junitFile,
+        properties: {
+            BUILD_NUMBER: process.env.BUILD_NUMBER || 'local-build',
+            JOB_NAME: process.env.JOB_NAME || 'selenium-tests'
+        }
+    } : {},
     slow: 10000,
     bail: false
 };
 
-// Si on veut aussi le rapport JUnit
+// Créer une instance de Mocha avec les options
 const mocha = new Mocha(mochaOptions);
 
-// Rediriger les logs vers un fichier
-const logFile = fs.createWriteStream('test-results/test-log.txt', { flags: 'w' });
-const originalConsoleLog = console.log;
-console.log = function () {
-    logFile.write(Array.from(arguments).join(' ') + '\n');
-    originalConsoleLog.apply(console, arguments);
-};
-
 // Créer les dossiers nécessaires
-const testResultsDir = path.dirname('test-results/selenium-junit.xml');
+const testResultsDir = path.dirname(config.reporters.junitFile);
 if (!fs.existsSync(testResultsDir)) {
     fs.mkdirSync(testResultsDir, { recursive: true });
 }
@@ -45,21 +41,17 @@ const server = spawn('node', [path.join(__dirname, 'startServer.js')], {
     stdio: 'inherit'
 });
 
-// Gestion des erreurs du serveur
-server.on('error', (err) => {
-    console.error('Erreur lors du démarrage du serveur:', err);
-});
-
 // Attendre que le serveur démarre
 setTimeout(() => {
-    // Ajouter tous les fichiers de test
+    // Ajouter tous les fichiers de test SAUF formTest.js
     const testDir = path.join(__dirname);
     fs.readdirSync(testDir)
         .filter(file => {
             return file.endsWith('Test.js') &&
                 !file.startsWith('base') &&
                 !file.startsWith('config') &&
-                !file.startsWith('run');
+                !file.startsWith('run') &&
+                file !== 'formTest.js'; // Exclure formTest.js
         })
         .forEach(file => {
             console.log(`Ajout du test: ${file}`);
@@ -80,13 +72,6 @@ setTimeout(() => {
     console.log('Démarrage des tests...\n');
 
     mocha.run(failures => {
-        // Générer aussi un rapport JUnit
-        const junitReporter = new Mocha.reporters.JUnit(mocha.suite, {
-            reporterOptions: {
-                mochaFile: 'test-results/selenium-junit.xml'
-            }
-        });
-
         if (failures) {
             console.error(`\n${failures} tests ont échoué.`);
             process.exitCode = 1;
@@ -96,7 +81,9 @@ setTimeout(() => {
         }
 
         // Afficher le chemin du rapport JUnit si généré
-        console.log(`\nRapport JUnit généré: test-results/selenium-junit.xml`);
+        if (config.reporters.junit) {
+            console.log(`\nRapport JUnit généré: ${config.reporters.junitFile}`);
+        }
 
         // Afficher le chemin des captures d'écran si présentes
         if (config.screenshotOnError && fs.existsSync(config.screenshotPath)) {
@@ -110,7 +97,6 @@ setTimeout(() => {
         // Arrêter le serveur web
         console.log('\nArrêt du serveur...');
         server.kill();
-        logFile.end();
         process.exit(process.exitCode);
     });
-}, 3000);
+}, 3000); // Attendre 3 secondes que le serveur démarre

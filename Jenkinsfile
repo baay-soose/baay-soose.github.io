@@ -19,15 +19,33 @@ pipeline {
             steps {
                 echo 'Validation du code HTML...'
                 
-                sh '''
-                    if ! command -v tidy &> /dev/null; then
-                        sudo apt-get update
-                        sudo apt-get install -y tidy
-                    fi
+                // Pour Windows, cherchons un validateur HTML compatible
+                bat '''
+                    echo Installation d'un validateur HTML...
+                    rem Vous pouvez installer un validateur HTML compatible Windows ici
+                    
+                    rem Pour l'instant, validons simplement que les fichiers HTML existent
+                    dir /b *.html
+                    
+                    rem Ou utilisez NPM pour installer un validateur
+                    if exist package.json (
+                        npm install htmlhint -g
+                        htmlhint *.html || exit 0
+                    )
                 '''
+            }
+        }
+        
+        stage('Setup Node') {
+            steps {
+                echo 'Configuration de Node.js...'
                 
-                sh '''
-                    find . -name "*.html" -exec tidy -errors -q {} \\; || true
+                // Vérifier si Node.js est installé
+                bat '''
+                    where node
+                    node --version
+                    
+                    rem Si Node n'est pas installé, vous devrez l'installer manuellement sur le serveur Jenkins
                 '''
             }
         }
@@ -36,21 +54,34 @@ pipeline {
             steps {
                 echo 'Vérification du CSS et JavaScript...'
                 
-                sh '''
-                    if ! command -v npm &> /dev/null; then
-                        curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-                        sudo apt-get install -y nodejs
-                    fi
+                bat '''
+                    rem Installation des linters
+                    npm install --save-dev eslint stylelint || exit 0
                     
-                    npm install -g csslint jshint eslint || true
+                    rem Création de la configuration ESLint
+                    echo { "env": { "browser": true }, "extends": "eslint:recommended" } > .eslintrc.json
+                    
+                    rem Exécution des linters
+                    if exist *.js (
+                        npx eslint *.js || exit 0
+                    )
+                    
+                    if exist *.css (
+                        npx stylelint *.css || exit 0
+                    )
                 '''
+            }
+        }
+        
+        stage('Install Selenium Dependencies') {
+            steps {
+                echo 'Installation des dépendances Selenium...'
                 
-                sh '''
-                    find . -name "*.css" -exec csslint {} \\; || true
-                '''
-                
-                sh '''
-                    find . -name "*.js" -exec eslint {} \\; || true
+                bat '''
+                    rem Installation des dépendances
+                    npm init -y || exit 0
+                    npm install --save-dev selenium-webdriver mocha chai || exit 0
+                    npm install --save-dev chromedriver || exit 0
                 '''
             }
         }
@@ -59,20 +90,23 @@ pipeline {
             steps {
                 echo 'Tests fonctionnels avec Selenium...'
                 
-                sh '''
-                    npm install selenium-webdriver mocha chai --save-dev || true
-                '''
-                
-                sh '''
-                    npm install -g http-server || true
-                    http-server . -p 8080 &
-                    SERVER_PID=$!
+                bat '''
+                    rem Démarrage d'un serveur HTTP simple
+                    npm install -g http-server || exit 0
+                    start /B http-server . -p 8080
                     
-                    sleep 5
+                    rem Attendre que le serveur démarre
+                    timeout /t 5
                     
-                    npm run test:selenium || true
+                    rem Exécuter les tests Selenium (si disponibles)
+                    if exist test\\selenium (
+                        npx mocha test\\selenium\\*.js || exit 0
+                    ) else (
+                        echo "Aucun test Selenium trouvé"
+                    )
                     
-                    kill $SERVER_PID
+                    rem Arrêter le serveur
+                    taskkill /F /IM node.exe || exit 0
                 '''
             }
         }
@@ -81,18 +115,36 @@ pipeline {
             steps {
                 echo 'Préparation pour la production...'
                 
-                sh '''
-                    npm install -g html-minifier cssnano terser || true
+                bat '''
+                    rem Création du dossier de build
+                    if not exist dist mkdir dist
                     
-                    mkdir -p dist
+                    rem Copie des fichiers
+                    xcopy /s /e /y *.html dist\\
+                    if exist *.css xcopy /s /e /y *.css dist\\
+                    if exist *.js xcopy /s /e /y *.js dist\\
+                    if exist images xcopy /s /e /y images dist\\images\\
+                    if exist fonts xcopy /s /e /y fonts dist\\fonts\\
                     
-                    cp -r *.html *.css *.js images fonts dist/ || true
+                    rem Minification (optionnel)
+                    npm install -g html-minifier || exit 0
+                    npm install -g terser || exit 0
+                    npm install -g cssnano-cli || exit 0
                     
-                    find dist -name "*.html" -exec html-minifier --collapse-whitespace --remove-comments {} -o {} \\; || true
+                    rem Minifier les fichiers
+                    cd dist
+                    for %%f in (*.html) do (
+                        html-minifier %%f -o %%f --collapse-whitespace --remove-comments || exit 0
+                    )
                     
-                    find dist -name "*.css" -exec cssnano {} {} \\; || true
+                    for %%f in (*.js) do (
+                        terser %%f -o %%f || exit 0
+                    )
                     
-                    find dist -name "*.js" -exec terser {} -o {} \\; || true
+                    for %%f in (*.css) do (
+                        cssnano %%f %%f || exit 0
+                    )
+                    cd ..
                 '''
             }
         }
@@ -104,17 +156,12 @@ pipeline {
             steps {
                 echo 'Déploiement du site...'
                 
-                // Pour déployer sur un serveur web Apache/Nginx via SSH
-                // sshagent(['server-ssh-key']) {
-                //     sh '''
-                //         scp -r dist/* user@your-server:/var/www/html/
-                //         ssh user@your-server "sudo systemctl restart nginx"
-                //     '''
-                // }
-                
-                // Pour GitHub Pages ou autre solution de déploiement simple
-                sh '''
-                    echo "Déploiement simulé - remplacez par votre propre logique"
+                bat '''
+                    rem Pour déployer sur un serveur local IIS ou autre
+                    rem xcopy /s /e /y dist\\* C:\\inetpub\\wwwroot\\
+                    
+                    rem Ou simplement afficher que le déploiement est prêt
+                    echo Site prêt à être déployé depuis le dossier dist
                 '''
             }
         }
@@ -123,17 +170,21 @@ pipeline {
             steps {
                 echo 'Tests de performance...'
                 
-                sh '''
-                    npm install -g lighthouse || true
+                bat '''
+                    rem Installation de Lighthouse (nécessite Chrome)
+                    npm install -g lighthouse || exit 0
                     
-                    http-server dist -p 8080 &
-                    SERVER_PID=$!
+                    rem Démarrage du serveur
+                    start /B http-server dist -p 8080
                     
-                    sleep 5
+                    rem Attendre que le serveur démarre
+                    timeout /t 5
                     
-                    lighthouse http://localhost:8080 --output=json --output-path=./lighthouse-report.json --chrome-flags="--headless" || true
+                    rem Exécuter Lighthouse (assurez-vous que Chrome est installé)
+                    lighthouse http://localhost:8080 --output=json --output-path=lighthouse-report.json --chrome-flags="--headless" || echo "Lighthouse échec"
                     
-                    kill $SERVER_PID
+                    rem Arrêter le serveur
+                    taskkill /F /IM node.exe || exit 0
                 '''
                 
                 archiveArtifacts artifacts: 'lighthouse-report.json', allowEmptyArchive: true

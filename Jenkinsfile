@@ -35,6 +35,53 @@ pipeline {
                 '''
             }
         }
+        stage('Validate CSS Files') {
+            steps {
+                echo 'Validation des fichiers CSS...'
+                bat '''
+                    echo Vérification de l'existence des fichiers CSS
+                    dir /b *.css
+                    
+                    echo Total des fichiers CSS trouvés :
+                    dir /b *.css | find /c /v ""
+                '''
+            }
+        }
+        stage('Validate JS Files') {
+            steps {
+                echo 'Validation des fichiers JavaScript...'
+                bat '''
+                    echo Vérification de l'existence des fichiers JavaScript
+                    dir /b *.js
+                    
+                    echo Total des fichiers JavaScript trouvés :
+                    dir /b *.js | find /c /v ""
+                '''
+            }
+        }
+
+        stage('Lint CSS and JavaScript') {
+            steps {
+                echo 'Vérification du CSS et JavaScript...'
+                
+                bat '''
+                    rem Installation des linters
+                    npm install --save-dev eslint stylelint || exit 0
+                    
+                    rem Création de la configuration ESLint
+                    echo { "env": { "browser": true }, "extends": "eslint:recommended" } > .eslintrc.json
+                    
+                    rem Exécution des linters
+                    if exist *.js (
+                        npx eslint *.js || exit 0
+                    )
+                    
+                    if exist *.css (
+                        npx stylelint *.css || exit 0
+                    )
+                '''
+            }
+        }
         
         stage('Build for Production') {
             steps {

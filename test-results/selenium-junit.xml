@@ -1,41 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="32.246" tests="10" failures="0" skipped="3">
-  <testsuite name="Root Suite" timestamp="2025-04-19T09:48:57" tests="0" time="0.000" failures="0">
+<testsuites name="Mocha Tests" time="18.732" tests="7" failures="0" skipped="2">
+  <testsuite name="Root Suite" timestamp="2025-04-19T11:34:42" tests="0" time="0.000" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
   </testsuite>
-  <testsuite name="Tests de formulaire" timestamp="2025-04-19T09:48:57" tests="3" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\formTest.js" time="18.462" failures="0">
+  <testsuite name="Tests de la page d&apos;accueil" timestamp="2025-04-19T11:34:42" tests="4" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\homePageTest.js" time="11.689" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
-    <testcase name="Tests de formulaire devrait trouver au moins un formulaire sur le site" time="1.060" classname="devrait trouver au moins un formulaire sur le site">
+    <testcase name="Tests de la page d&apos;accueil devrait charger la page d&apos;accueil avec un titre" time="0.552" classname="devrait charger la page d&apos;accueil avec un titre">
     </testcase>
-    <testcase name="Tests de formulaire devrait trouver des champs de formulaire" time="1.263" classname="devrait trouver des champs de formulaire">
+    <testcase name="Tests de la page d&apos;accueil devrait trouver au moins un �l�ment de navigation" time="0.889" classname="devrait trouver au moins un �l�ment de navigation">
+    </testcase>
+    <testcase name="Tests de la page d&apos;accueil devrait avoir un �l�ment principal (h1 ou autre)" time="0.947" classname="devrait avoir un �l�ment principal (h1 ou autre)">
+    </testcase>
+    <testcase name="Tests de la page d&apos;accueil devrait avoir un footer ou un �l�ment en bas de page" time="0.735" classname="devrait avoir un footer ou un �l�ment en bas de page">
     </testcase>
   </testsuite>
-  <testsuite name="Tests de la page d&apos;accueil" timestamp="2025-04-19T09:49:15" tests="4" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\homePageTest.js" time="7.901" failures="0">
+  <testsuite name="Tests de navigation" timestamp="2025-04-19T11:34:54" tests="3" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\navigationTest.js" time="7.041" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
-    <testcase name="Tests de la page d&apos;accueil devrait charger la page d&apos;accueil avec un titre" time="0.531" classname="devrait charger la page d&apos;accueil avec un titre">
-    </testcase>
-    <testcase name="Tests de la page d&apos;accueil devrait trouver au moins un �l�ment de navigation" time="0.954" classname="devrait trouver au moins un �l�ment de navigation">
-    </testcase>
-    <testcase name="Tests de la page d&apos;accueil devrait avoir un �l�ment principal (h1 ou autre)" time="0.770" classname="devrait avoir un �l�ment principal (h1 ou autre)">
-    </testcase>
-    <testcase name="Tests de la page d&apos;accueil devrait avoir un footer ou un �l�ment en bas de page" time="0.917" classname="devrait avoir un footer ou un �l�ment en bas de page">
-    </testcase>
-  </testsuite>
-  <testsuite name="Tests de navigation" timestamp="2025-04-19T09:49:23" tests="3" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\navigationTest.js" time="5.878" failures="0">
-    <properties>
-      <property name="BUILD_NUMBER" value="local-build"/>
-      <property name="JOB_NAME" value="selenium-tests"/>
-    </properties>
-    <testcase name="Tests de navigation devrait trouver des liens de navigation" time="0.814" classname="devrait trouver des liens de navigation">
+    <testcase name="Tests de navigation devrait trouver des liens de navigation" time="1.018" classname="devrait trouver des liens de navigation">
     </testcase>
   </testsuite>
 </testsuites>

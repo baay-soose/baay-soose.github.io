@@ -120,6 +120,7 @@
         failure {
             echo 'Pipeline échoué !'
         }
+
         
         always {
             cleanWs()

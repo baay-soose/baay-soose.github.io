@@ -12,21 +12,35 @@ pipeline {
         stage('Check NodeJS') {
             steps {
                 script {
+                    // Vérifier si Node.js est disponible
                     try {
                         bat 'node --version'
                         echo 'Node.js est déjà disponible sur le système'
                     } catch (Exception e) {
                         echo 'Node.js n\'est pas disponible dans le PATH'
-                        error('Node.js n\'est pas installé. Veuillez l\'installer sur le serveur Jenkins.')
+                        
+                        // Essayer de trouver Node.js dans les emplacements courants
+                        def nodePaths = [
+                            'C:\\Program Files\\nodejs',
+                            'C:\\Program Files (x86)\\nodejs',
+                            'C:\\nodejs'
+                        ]
+                        
+                        def nodeFound = false
+                        for (path in nodePaths) {
+                            if (fileExists("${path}\\node.exe")) {
+                                echo "Node.js trouvé dans ${path}"
+                                env.PATH = "${path};${env.PATH}"
+                                nodeFound = true
+                                break
+                            }
+                        }
+                        
+                        if (!nodeFound) {
+                            error('Node.js n\'est pas installé. Veuillez l\'installer sur le serveur Jenkins.')
+                        }
                     }
                 }
-            }
-        }
-        
-        stage('Checkout') {
-            steps {
-                git branch: 'main', 
-                    url: 'https://github.com/baay-soose/baay-soose.github.io.git'
             }
         }
         

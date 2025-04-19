@@ -1,7 +1,52 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\homePageTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\homePageTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\runAllTests.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\runAllTests.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\Source\\Repos\\baay-soose.github.io\\Jenkinsfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Jenkinsfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\navigationTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\navigationTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\mocha.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\mocha.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\Source\\Repos\\baay-soose.github.io\\tests\\selenium\\formTest.js||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\formTest.js||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\baseTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\baseTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,6 +67,149 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-19T08:10:17.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\package.json",
+              "RelativeDocumentMoniker": "package.json",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\package.json",
+              "RelativeToolTip": "package.json",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAADkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-19T07:53:48.01Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "homePageTest.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\homePageTest.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\homePageTest.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\homePageTest.js",
+              "RelativeToolTip": "tests\\selenium\\homePageTest.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD4AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-19T07:52:15.521Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "runAllTests.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\runAllTests.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\runAllTests.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\runAllTests.js",
+              "RelativeToolTip": "tests\\selenium\\runAllTests.js",
+              "ViewState": "AgIAADQAAAAAAAAAAAAmwFcAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-19T07:51:28.842Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "mocha.config.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\mocha.config.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\mocha.config.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\mocha.config.js",
+              "RelativeToolTip": "tests\\selenium\\mocha.config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-19T07:51:15.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "config.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\config.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\config.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\config.js",
+              "RelativeToolTip": "tests\\selenium\\config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-19T07:51:03.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "formTest.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\Source\\Repos\\baay-soose.github.io\\tests\\selenium\\formTest.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\formTest.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\Source\\Repos\\baay-soose.github.io\\tests\\selenium\\formTest.js",
+              "RelativeToolTip": "tests\\selenium\\formTest.js",
+              "ViewState": "AgIAADMAAAAAAAAAAAAmwFkAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-19T07:50:38.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "navigationTest.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\Source\\Repos\\baay-soose.github.io\\tests\\selenium\\navigationTest.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\navigationTest.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\Source\\Repos\\baay-soose.github.io\\tests\\selenium\\navigationTest.js",
+              "RelativeToolTip": "tests\\selenium\\navigationTest.js",
+              "ViewState": "AgIAACUAAAAAAAAAAAAmwEgAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-19T07:50:04.67Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "baseTest.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\Source\\Repos\\baay-soose.github.io\\tests\\selenium\\baseTest.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\baseTest.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\Source\\Repos\\baay-soose.github.io\\tests\\selenium\\baseTest.js",
+              "RelativeToolTip": "tests\\selenium\\baseTest.js",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAmwCQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-19T07:49:33.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Jenkinsfile",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\Source\\Repos\\baay-soose.github.io\\Jenkinsfile",
+              "RelativeDocumentMoniker": "Jenkinsfile",
+              "ToolTip": "C:\\Users\\Utilisateur\\Source\\Repos\\baay-soose.github.io\\Jenkinsfile",
+              "RelativeToolTip": "Jenkinsfile",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAIwKoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-19T06:09:09.812Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\index.html",
+              "RelativeDocumentMoniker": "index.html",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\index.html",
+              "RelativeToolTip": "index.html",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACcAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-04-19T05:23:00.133Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",

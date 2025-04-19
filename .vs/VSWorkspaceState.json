@@ -5,6 +5,6 @@
     "\\tests\\selenium",
     "\\tests\\selenium\\formTest.js"
   ],
-  "SelectedNode": "\\.gitignore",
+  "SelectedNode": "\\Jenkinsfile",
   "PreviewInSolutionExplorer": false
 }

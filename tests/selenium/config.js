@@ -1,8 +1,9 @@
 // tests/selenium/config.js
 module.exports = {
-    baseUrl: process.env.BASE_URL || 'http://localhost:8080',
+    baseUrl: process.env.BASE_URL || `http://localhost:${process.env.TEST_PORT || 8081}`,
     timeout: 30000,
     headless: process.env.HEADLESS === 'true',
+    port: process.env.TEST_PORT || 8081,
     windowSize: {
         width: 1920,
         height: 1080

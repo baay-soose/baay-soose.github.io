@@ -4,6 +4,7 @@ pipeline {
     environment {
         APP_NAME = 'baay-soose.github.io'
         DEPLOY_ENV = 'production'
+        TEST_PORT = '8081'
     }
     
     stages {
@@ -67,7 +68,7 @@ pipeline {
                     if not exist tests\\selenium mkdir tests\\selenium
                     
                     rem Installer les dépendances Selenium
-                    npm install mocha selenium-webdriver chromedriver --save-dev || exit 0
+                    npm install mocha selenium-webdriver chromedriver mocha-junit-reporter --save-dev || exit 0
                     
                     rem Créer le package.json si nécessaire
                     if not exist package.json (
@@ -81,17 +82,17 @@ pipeline {
             steps {
                 echo 'Exécution des tests Selenium...'
                 bat '''
-                    rem Démarrer un serveur HTTP pour les tests
-                    start /B npx http-server . -p 8080
+                    rem Définir le port pour les tests
+                    set TEST_PORT=8081
                     
-                    rem Attendre que le serveur démarre
-                    timeout /t 5
+                    rem Créer le répertoire pour les résultats des tests
+                    if not exist test-results mkdir test-results
                     
-                    rem Exécuter les tests Selenium
-                    npm run test:selenium || echo "Aucun test Selenium ou échec des tests"
+                    rem Créer le répertoire pour les captures d'écran
+                    if not exist screenshots mkdir screenshots
                     
-                    rem Arrêter le serveur HTTP
-                    taskkill /F /IM node.exe || exit 0
+                    rem Exécuter les tests avec le script runAllTests.js
+                    node tests/selenium/runAllTests.js || echo "Échec des tests Selenium"
                 '''
             }
             post {

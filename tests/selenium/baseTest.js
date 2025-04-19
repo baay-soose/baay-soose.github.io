@@ -2,6 +2,7 @@
 const { Builder, Browser } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const assert = require('assert');
+const config = require('./config');
 
 class BaseTest {
     constructor() {
@@ -10,10 +11,7 @@ class BaseTest {
 
     async setup() {
         const options = new chrome.Options();
-        options.addArguments('--headless');
-        options.addArguments('--no-sandbox');
-        options.addArguments('--disable-dev-shm-usage');
-        options.addArguments('--window-size=1920,1080');
+        config.chromeOptions().forEach(arg => options.addArguments(arg));
 
         this.driver = await new Builder()
             .forBrowser(Browser.CHROME)

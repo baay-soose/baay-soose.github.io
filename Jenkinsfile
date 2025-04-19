@@ -1,6 +1,10 @@
 pipeline {
     agent any
     
+    tools {
+        nodejs 'NodeJS-16'  // Nom configuré dans Global Tool Configuration
+    }
+    
     environment {
         APP_NAME = 'baay-soose.github.io'
         DEPLOY_ENV = 'production'
@@ -33,6 +37,15 @@ pipeline {
                     
                     echo Total des fichiers HTML trouvés :
                     dir /b *.html | find /c /v ""
+                '''
+            }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                echo 'Installation des dépendances...'
+                bat '''
+                    npm install || exit 0
                 '''
             }
         }

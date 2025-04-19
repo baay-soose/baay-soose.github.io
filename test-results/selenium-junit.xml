@@ -1,156 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="122.839" tests="11" failures="11">
-  <testsuite name="Root Suite" timestamp="2025-04-19T09:30:17" tests="0" time="0.000" failures="0">
+<testsuites name="Mocha Tests" time="32.246" tests="10" failures="0" skipped="3">
+  <testsuite name="Root Suite" timestamp="2025-04-19T09:48:57" tests="0" time="0.000" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
   </testsuite>
-  <testsuite name="Tests de formulaire" timestamp="2025-04-19T09:30:17" tests="3" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\formTest.js" time="40.301" failures="3">
+  <testsuite name="Tests de formulaire" timestamp="2025-04-19T09:48:57" tests="3" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\formTest.js" time="18.462" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
-    <testcase name="Tests de formulaire devrait valider le formulaire de contact" time="10.956" classname="devrait valider le formulaire de contact">
-      <failure message="no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;input[name=&quot;name&quot;], #name&quot;}
-  (Session info: chrome=135.0.7049.96)" type="NoSuchElementError"><![CDATA[NoSuchElementError: no such element: Unable to locate element: {"method":"css selector","selector":"input[name="name"], #name"}
-  (Session info: chrome=135.0.7049.96)
-    at Object.throwDecodedError (node_modules\selenium-webdriver\lib\error.js:523:15)
-    at parseHttpResponse (node_modules\selenium-webdriver\lib\http.js:524:13)
-    at Executor.execute (node_modules\selenium-webdriver\lib\http.js:456:28)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:745:17)
-    at async toWireValue (node_modules\selenium-webdriver\lib\webdriver.js:149:15)
-    at async C:\Users\Utilisateur\source\repos\baay-soose.github.io\node_modules\selenium-webdriver\lib\webdriver.js:195:16
-    at async forEachKey (node_modules\selenium-webdriver\lib\webdriver.js:189:9)
-    at async convertKeys (node_modules\selenium-webdriver\lib\webdriver.js:194:3)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:743:22)]]></failure>
+    <testcase name="Tests de formulaire devrait trouver au moins un formulaire sur le site" time="1.060" classname="devrait trouver au moins un formulaire sur le site">
     </testcase>
-    <testcase name="Tests de formulaire devrait valider les champs requis" time="10.884" classname="devrait valider les champs requis">
-      <failure message="no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;.error, .alert-danger, .error-message&quot;}
-  (Session info: chrome=135.0.7049.96)" type="NoSuchElementError"><![CDATA[NoSuchElementError: no such element: Unable to locate element: {"method":"css selector","selector":".error, .alert-danger, .error-message"}
-  (Session info: chrome=135.0.7049.96)
-    at Object.throwDecodedError (node_modules\selenium-webdriver\lib\error.js:523:15)
-    at parseHttpResponse (node_modules\selenium-webdriver\lib\http.js:524:13)
-    at Executor.execute (node_modules\selenium-webdriver\lib\http.js:456:28)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:745:17)
-    at async Context.<anonymous> (tests\selenium\formTest.js:59:34)]]></failure>
-    </testcase>
-    <testcase name="Tests de formulaire devrait valider le format de l&apos;email" time="10.845" classname="devrait valider le format de l&apos;email">
-      <failure message="no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;input[name=&quot;email&quot;], #email&quot;}
-  (Session info: chrome=135.0.7049.96)" type="NoSuchElementError"><![CDATA[NoSuchElementError: no such element: Unable to locate element: {"method":"css selector","selector":"input[name="email"], #email"}
-  (Session info: chrome=135.0.7049.96)
-    at Object.throwDecodedError (node_modules\selenium-webdriver\lib\error.js:523:15)
-    at parseHttpResponse (node_modules\selenium-webdriver\lib\http.js:524:13)
-    at Executor.execute (node_modules\selenium-webdriver\lib\http.js:456:28)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:745:17)
-    at async toWireValue (node_modules\selenium-webdriver\lib\webdriver.js:149:15)
-    at async C:\Users\Utilisateur\source\repos\baay-soose.github.io\node_modules\selenium-webdriver\lib\webdriver.js:195:16
-    at async forEachKey (node_modules\selenium-webdriver\lib\webdriver.js:189:9)
-    at async convertKeys (node_modules\selenium-webdriver\lib\webdriver.js:194:3)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:743:22)]]></failure>
+    <testcase name="Tests de formulaire devrait trouver des champs de formulaire" time="1.263" classname="devrait trouver des champs de formulaire">
     </testcase>
   </testsuite>
-  <testsuite name="Tests de la page d&apos;accueil" timestamp="2025-04-19T09:30:57" tests="4" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\homePageTest.js" time="36.779" failures="4">
+  <testsuite name="Tests de la page d&apos;accueil" timestamp="2025-04-19T09:49:15" tests="4" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\homePageTest.js" time="7.901" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
-    <testcase name="Tests de la page d&apos;accueil devrait charger la page d&apos;accueil avec le bon titre" time="0.688" classname="devrait charger la page d&apos;accueil avec le bon titre">
-      <failure message="Le titre devrait contenir &quot;Baay Soose&quot;" type="AssertionError"><![CDATA[AssertionError [ERR_ASSERTION]: Le titre devrait contenir "Baay Soose"
-    at Context.<anonymous> (tests\selenium\homePageTest.js:24:16)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-
-      + expected - actual
-
-      -false
-      +true
-      ]]></failure>
+    <testcase name="Tests de la page d&apos;accueil devrait charger la page d&apos;accueil avec un titre" time="0.531" classname="devrait charger la page d&apos;accueil avec un titre">
     </testcase>
-    <testcase name="Tests de la page d&apos;accueil devrait afficher les �l�ments de navigation" time="10.731" classname="devrait afficher les �l�ments de navigation">
-      <failure message="no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;nav&quot;}
-  (Session info: chrome=135.0.7049.96)" type="NoSuchElementError"><![CDATA[NoSuchElementError: no such element: Unable to locate element: {"method":"css selector","selector":"nav"}
-  (Session info: chrome=135.0.7049.96)
-    at Object.throwDecodedError (node_modules\selenium-webdriver\lib\error.js:523:15)
-    at parseHttpResponse (node_modules\selenium-webdriver\lib\http.js:524:13)
-    at Executor.execute (node_modules\selenium-webdriver\lib\http.js:456:28)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:745:17)
-    at async Context.<anonymous> (tests\selenium\homePageTest.js:31:21)]]></failure>
+    <testcase name="Tests de la page d&apos;accueil devrait trouver au moins un �l�ment de navigation" time="0.954" classname="devrait trouver au moins un �l�ment de navigation">
     </testcase>
-    <testcase name="Tests de la page d&apos;accueil devrait afficher la section h�ros" time="10.338" classname="devrait afficher la section h�ros">
-      <failure message="no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;.hero, #hero&quot;}
-  (Session info: chrome=135.0.7049.96)" type="NoSuchElementError"><![CDATA[NoSuchElementError: no such element: Unable to locate element: {"method":"css selector","selector":".hero, #hero"}
-  (Session info: chrome=135.0.7049.96)
-    at Object.throwDecodedError (node_modules\selenium-webdriver\lib\error.js:523:15)
-    at parseHttpResponse (node_modules\selenium-webdriver\lib\http.js:524:13)
-    at Executor.execute (node_modules\selenium-webdriver\lib\http.js:456:28)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:745:17)
-    at async Context.<anonymous> (tests\selenium\homePageTest.js:43:29)]]></failure>
+    <testcase name="Tests de la page d&apos;accueil devrait avoir un �l�ment principal (h1 ou autre)" time="0.770" classname="devrait avoir un �l�ment principal (h1 ou autre)">
     </testcase>
-    <testcase name="Tests de la page d&apos;accueil devrait avoir un footer avec des informations de contact" time="10.774" classname="devrait avoir un footer avec des informations de contact">
-      <failure message="no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;footer&quot;}
-  (Session info: chrome=135.0.7049.96)" type="NoSuchElementError"><![CDATA[NoSuchElementError: no such element: Unable to locate element: {"method":"css selector","selector":"footer"}
-  (Session info: chrome=135.0.7049.96)
-    at Object.throwDecodedError (node_modules\selenium-webdriver\lib\error.js:523:15)
-    at parseHttpResponse (node_modules\selenium-webdriver\lib\http.js:524:13)
-    at Executor.execute (node_modules\selenium-webdriver\lib\http.js:456:28)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:745:17)
-    at async Context.<anonymous> (tests\selenium\homePageTest.js:56:24)]]></failure>
+    <testcase name="Tests de la page d&apos;accueil devrait avoir un footer ou un �l�ment en bas de page" time="0.917" classname="devrait avoir un footer ou un �l�ment en bas de page">
     </testcase>
   </testsuite>
-  <testsuite name="Tests de navigation" timestamp="2025-04-19T09:31:34" tests="4" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\navigationTest.js" time="45.758" failures="4">
+  <testsuite name="Tests de navigation" timestamp="2025-04-19T09:49:23" tests="3" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\navigationTest.js" time="5.878" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
-    <testcase name="Tests de navigation devrait naviguer vers la page � propos" time="10.138" classname="devrait naviguer vers la page � propos">
-      <failure message="no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//a[contains(text(), &apos;� propos&apos;) or contains(text(), &apos;About&apos;)]&quot;}
-  (Session info: chrome=135.0.7049.96)" type="NoSuchElementError"><![CDATA[NoSuchElementError: no such element: Unable to locate element: {"method":"xpath","selector":"//a[contains(text(), '� propos') or contains(text(), 'About')]"}
-  (Session info: chrome=135.0.7049.96)
-    at Object.throwDecodedError (node_modules\selenium-webdriver\lib\error.js:523:15)
-    at parseHttpResponse (node_modules\selenium-webdriver\lib\http.js:524:13)
-    at Executor.execute (node_modules\selenium-webdriver\lib\http.js:456:28)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:745:17)
-    at async Context.<anonymous> (tests\selenium\navigationTest.js:25:27)]]></failure>
-    </testcase>
-    <testcase name="Tests de navigation devrait naviguer vers la page Services" time="10.719" classname="devrait naviguer vers la page Services">
-      <failure message="no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//a[contains(text(), &apos;Services&apos;)]&quot;}
-  (Session info: chrome=135.0.7049.96)" type="NoSuchElementError"><![CDATA[NoSuchElementError: no such element: Unable to locate element: {"method":"xpath","selector":"//a[contains(text(), 'Services')]"}
-  (Session info: chrome=135.0.7049.96)
-    at Object.throwDecodedError (node_modules\selenium-webdriver\lib\error.js:523:15)
-    at parseHttpResponse (node_modules\selenium-webdriver\lib\http.js:524:13)
-    at Executor.execute (node_modules\selenium-webdriver\lib\http.js:456:28)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:745:17)
-    at async Context.<anonymous> (tests\selenium\navigationTest.js:38:30)]]></failure>
-    </testcase>
-    <testcase name="Tests de navigation devrait naviguer vers la page Contact" time="10.300" classname="devrait naviguer vers la page Contact">
-      <failure message="no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//a[contains(text(), &apos;Contact&apos;)]&quot;}
-  (Session info: chrome=135.0.7049.96)" type="NoSuchElementError"><![CDATA[NoSuchElementError: no such element: Unable to locate element: {"method":"xpath","selector":"//a[contains(text(), 'Contact')]"}
-  (Session info: chrome=135.0.7049.96)
-    at Object.throwDecodedError (node_modules\selenium-webdriver\lib\error.js:523:15)
-    at parseHttpResponse (node_modules\selenium-webdriver\lib\http.js:524:13)
-    at Executor.execute (node_modules\selenium-webdriver\lib\http.js:456:28)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:745:17)
-    at async Context.<anonymous> (tests\selenium\navigationTest.js:52:29)]]></failure>
-    </testcase>
-    <testcase name="Tests de navigation devrait revenir � la page d&apos;accueil via le logo" time="10.349" classname="devrait revenir � la page d&apos;accueil via le logo">
-      <failure message="no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;.logo, #logo, a[href=&quot;index.html&quot;], a[href=&quot;/&quot;]&quot;}
-  (Session info: chrome=135.0.7049.96)" type="NoSuchElementError"><![CDATA[NoSuchElementError: no such element: Unable to locate element: {"method":"css selector","selector":".logo, #logo, a[href="index.html"], a[href="/"]"}
-  (Session info: chrome=135.0.7049.96)
-    at Object.throwDecodedError (node_modules\selenium-webdriver\lib\error.js:523:15)
-    at parseHttpResponse (node_modules\selenium-webdriver\lib\http.js:524:13)
-    at Executor.execute (node_modules\selenium-webdriver\lib\http.js:456:28)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Driver.execute (node_modules\selenium-webdriver\lib\webdriver.js:745:17)
-    at async Context.<anonymous> (tests\selenium\navigationTest.js:65:22)]]></failure>
+    <testcase name="Tests de navigation devrait trouver des liens de navigation" time="0.814" classname="devrait trouver des liens de navigation">
     </testcase>
   </testsuite>
 </testsuites>

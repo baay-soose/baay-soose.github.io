@@ -9,7 +9,7 @@ pipeline {
         APP_NAME = 'baay-soose.github.io'
         DEPLOY_ENV = 'production'
         TEST_PORT = '8081'
-        CHROMEDRIVER_PATH = 'C:\\path\\to\\chromedriver'
+        CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application'
     }
     
     stages {
@@ -73,33 +73,7 @@ pipeline {
                 '''
             }
         }
-        stage('Verify Chrome Installation') {
-    steps {
-        echo 'Vérification de l\'installation de Chrome...'
-        bat '''
-            where chrome || where google-chrome || echo "Chrome non trouvé dans le PATH"
-            
-            rem Vérifier les emplacements courants de Chrome
-            if exist "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" (
-                echo "Chrome trouvé dans Program Files"
-            ) else if exist "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe" (
-                echo "Chrome trouvé dans Program Files (x86)"
-            ) else (
-                echo "Chrome non trouvé dans les emplacements standards"
-            )
-        '''
-    }
-}
-
-stage('Check ChromeDriver') {
-    steps {
-        echo 'Vérification de ChromeDriver...'
-        bat '''
-            npx chromedriver --version || echo "ChromeDriver non accessible"
-        '''
-    }
-}
-        
+  
         stage('Setup Selenium') {
             steps {
                 echo 'Configuration des tests Selenium...'

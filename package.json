@@ -1,0 +1,58 @@
+// package.json
+{
+  "name": "baay-soose-tests",
+  "version": "1.0.0",
+  "description": "Tests Selenium pour baay-soose.github.io",
+  "scripts": {
+    "test": "mocha tests/selenium/**/*.js --timeout 30000",
+    "test:selenium": "npm run test",
+    "test:headless": "cross-env HEADLESS=true mocha tests/selenium/**/*.js --timeout 30000",
+    "test:single": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "selenium-webdriver": "^4.15.0",
+    "chromedriver": "^119.0.1",
+    "cross-env": "^7.0.3",
+    "assert": "^2.1.0"
+  }
+}
+
+// tests/selenium/config.js
+module.exports = {
+  baseUrl: process.env.BASE_URL
+  || 'http://localhost:8080',
+  timeout: 30000,
+  headless: process.env.HEADLESS
+  === 'true',
+  windowSize: {
+    width: 1920,
+    height: 1080
+  }
+};
+
+// tests/selenium/runAllTests.js
+const Mocha = require('mocha'); const path = require('path'); const fs = require('fs');
+
+// Initialiser Mocha
+const mocha = new Mocha( {
+  timeout: 30000,
+  reporter: 'spec'
+});
+
+// Ajouter tous les fichiers de test
+const testDir = path.join(__dirname); fs.readdirSync(testDir) .filter(file => file.endsWith('Test.js')) .forEach(file => {
+  mocha.addFile(path.join(testDir,
+  file));
+});
+
+// Exécuter les tests
+mocha.run(failures => {
+  process.exitCode =
+  failures ?
+  1: 0;
+});
+
+"scripts": {
+  "test:all": "node tests/selenium/runAllTests.js"
+}

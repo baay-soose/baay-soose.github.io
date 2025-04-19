@@ -92,32 +92,48 @@ pipeline {
         }
         
         stage('Run Selenium Tests') {
-            steps {
-                echo 'Exécution des tests Selenium...'
-                bat '''
-                    rem Définir le port pour les tests
-                    set TEST_PORT=8081
-                    
-                    rem Créer le répertoire pour les résultats des tests
-                    if not exist test-results mkdir test-results
-                    
-                    rem Créer le répertoire pour les captures d'écran
-                    if not exist screenshots mkdir screenshots
-                    
-                    rem Exécuter les tests avec le script runAllTests.js
-                    node tests/selenium/runAllTests.js || echo "Échec des tests Selenium"
-                '''
-            }
-            post {
-                always {
-                    // Archiver les résultats des tests
-                    junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
-                    
-                    // Archiver les captures d'écran si présentes
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'screenshots/**/*.png'
-                }
-            }
+    steps {
+        echo 'Exécution des tests Selenium...'
+        bat '''
+            rem Définir le port pour les tests
+            set TEST_PORT=8081
+            
+            rem Créer le répertoire pour les résultats des tests
+            if not exist test-results mkdir test-results
+            
+            rem Créer le répertoire pour les captures d'écran
+            if not exist screenshots mkdir screenshots
+            
+            rem Vérifier que Node.js est disponible
+            node --version
+            
+            rem Exécuter les tests avec le script runAllTests.js
+            node tests/selenium/runAllTests.js || echo "Échec des tests Selenium"
+        '''
+    }
+    post {
+        always {
+            // Archiver les résultats des tests
+            junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
+            
+            // Archiver les captures d'écran si présentes
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'screenshots/**/*.png'
+            
+            // Archiver les logs détaillés
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'test-results/*.txt'
+            
+            // Publier le rapport HTML si vous en avez un
+            publishHTML(target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'test-results',
+                reportFiles: 'selenium-report.html',
+                reportName: 'Selenium Test Report'
+            ])
         }
+    }
+}
         
         stage('Build for Production') {
             steps {

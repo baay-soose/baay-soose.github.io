@@ -22,7 +22,7 @@ pipeline {
                 '''
             }
         }
-        stages {
+
         stage('Check NodeJS') {
             steps {
                 script {
@@ -154,7 +154,7 @@ pipeline {
         stage('Archive Build') {
             steps {
                 echo 'Archivage du build...'
-                archiveArtifacts artifacts: 'dist/*/', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'dist/**/*', allowEmptyArchive: true
             }
         }
 
@@ -172,7 +172,7 @@ pipeline {
         }
     }
 
-     post {
+    post {
         success {
             echo 'Pipeline exécuté avec succès !'
         }

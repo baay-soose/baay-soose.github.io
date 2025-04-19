@@ -5,7 +5,8 @@ pipeline {
         APP_NAME = 'baay-soose.github.io'
         DEPLOY_ENV = 'production'
         TEST_PORT = '8081'
-        
+        CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application'
+        CHROMEDRIVER_PATH = ''
     }
     
     stages {

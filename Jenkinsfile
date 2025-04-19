@@ -1,15 +1,17 @@
-pipeline {
+Ôªøpipeline {
     agent any
-
+    
+    tools {
+        nodejs 'NodeJS'  // Nom configur√© dans Global Tool Configuration
+    }
+    
     environment {
         APP_NAME = 'baay-soose.github.io'
         DEPLOY_ENV = 'production'
         TEST_PORT = '8081'
         CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application'
-        
-        CHROMEDRIVER_PATH = '%CD%\\node_modules\\.bin'
     }
-
+    
     stages {
         stage('Checkout') {
             steps {
@@ -17,7 +19,7 @@ pipeline {
                     url: 'https://github.com/baay-soose/baay-soose.github.io.git'
             }
         }
-
+        
         stage('List Files') {
             steps {
                 echo 'Listing des fichiers du projet...'
@@ -26,177 +28,171 @@ pipeline {
                 '''
             }
         }
-
-        stage('Check NodeJS') {
-            steps {
-                script {
-                    // VÈrifier si Node.js est disponible
-                    try {
-                        bat 'node --version'
-                        echo 'Node.js est dÈj‡ disponible sur le systËme'
-                    } catch (Exception e) {
-                        echo 'Node.js n\'est pas disponible dans le PATH'
-                        
-                        // Essayer de trouver Node.js dans les emplacements courants
-                        def nodePaths = [
-                            'C:\\Program Files\\nodejs',
-                            'C:\\Program Files (x86)\\nodejs',
-                            'C:\\nodejs'
-                        ]
-                        
-                        def nodeFound = false
-                        for (path in nodePaths) {
-                            if (fileExists("${path}\\node.exe")) {
-                                echo "Node.js trouvÈ dans ${path}"
-                                env.PATH = "${path};${env.PATH}"
-                                nodeFound = true
-                                break
-                            }
-                        }
-                        
-                        if (!nodeFound) {
-                            error('Node.js n\'est pas installÈ. Veuillez l\'installer sur le serveur Jenkins.')
-                        }
-                    }
-                }
-            }
-        }
-
-        stage('Check Chrome') {
-            steps {
-                echo 'VÈrification de l\'installation de Chrome...'
-                script {
-                    try {
-                        bat 'where chrome'
-                        echo 'Chrome trouvÈ dans le PATH'
-                    } catch (Exception e) {
-                        echo 'Chrome non trouvÈ dans le PATH - VÈrification des emplacements standards...'
-                    }
-                    
-                    if (fileExists('C:/Program Files/Google/Chrome/Application/chrome.exe')) {
-                        echo 'Chrome trouvÈ dans Program Files'
-                    } else {
-                        echo 'Chrome non trouvÈ - Les tests Selenium pourraient Èchouer'
-                    }
-                }
-            }
-        }
-
+        
         stage('Validate HTML Files') {
             steps {
                 echo 'Validation des fichiers HTML...'
                 bat '''
-                    echo VÈrification de l'existence des fichiers HTML
+                    echo V√©rification de l'existence des fichiers HTML
                     dir /b *.html
-
-                    echo Total des fichiers HTML trouvÈs :
+                    
+                    echo Total des fichiers HTML trouv√©s :
                     dir /b *.html | find /c /v ""
                 '''
             }
         }
-
+        
+        stage('Install Dependencies') {
+            steps {
+                echo 'Installation des d√©pendances...'
+                bat '''
+                    npm install || exit 0
+                '''
+            }
+        }
+        
         stage('Lint CSS and JavaScript') {
             steps {
-                echo 'VÈrification du CSS et JavaScript...'
-
+                echo 'V√©rification du CSS et JavaScript...'
+                
                 bat '''
                     rem Installation des linters
                     npm install --save-dev eslint stylelint || exit 0
-
-                    rem CrÈation de la configuration ESLint
+                    
+                    rem Cr√©ation de la configuration ESLint
                     echo { "env": { "browser": true }, "extends": "eslint:recommended" } > .eslintrc.json
-
-                    rem ExÈcution des linters
+                    
+                    rem Ex√©cution des linters
                     if exist *.js (
                         npx eslint *.js || exit 0
                     )
-
+                    
                     if exist *.css (
                         npx stylelint *.css || exit 0
                     )
                 '''
             }
         }
-
-        stage('Run Selenium Tests') {
+  
+        stage('Setup Selenium') {
             steps {
-                echo 'ExÈcution des tests Selenium...'
+                echo 'Configuration des tests Selenium...'
                 bat '''
-                    rem Ajouter Chrome et ChromeDriver au PATH pour cette session
-                    set PATH=%CHROME_PATH%;%CHROMEDRIVER_PATH%;%PATH%
+                    rem Cr√©er le dossier tests s'il n'existe pas
+                    if not exist tests\\selenium mkdir tests\\selenium
                     
-                    rem DÈfinir le port pour les tests
-                    set TEST_PORT=8081
+                    rem Installer les d√©pendances Selenium
+                    npm install mocha selenium-webdriver chromedriver mocha-junit-reporter --save-dev || exit 0
                     
-                    rem CrÈer les rÈpertoires nÈcessaires
-                    if not exist test-results mkdir test-results
-                    if not exist screenshots mkdir screenshots
-                    
-                    rem ExÈcuter les tests
-                    node tests/selenium/runAllTests.js || echo "Tests Selenium terminÈs"
+                    rem Cr√©er le package.json si n√©cessaire
+                    if not exist package.json (
+                        npm init -y
+                    )
                 '''
             }
         }
-    }
-}
-
+        
+        stage('Run Selenium Tests') {
+            steps {
+                echo 'Ex√©cution des tests Selenium...'
+                bat '''
+                    rem D√©finir le port pour les tests
+                    set TEST_PORT=8081
+                    
+                    rem Cr√©er le r√©pertoire pour les r√©sultats des tests
+                    if not exist test-results mkdir test-results
+                    
+                    rem Cr√©er le r√©pertoire pour les captures d'√©cran
+                    if not exist screenshots mkdir screenshots
+                    
+                    rem V√©rifier que Node.js est disponible
+                    node --version
+                    
+                    rem Ex√©cuter les tests avec le script runAllTests.js
+                    node tests/selenium/runAllTests.js || echo "√âchec des tests Selenium"
+                '''
+            }
+            post {
+                always {
+                    // Archiver les r√©sultats des tests
+                    junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
+                    
+                    // Archiver les captures d'√©cran si pr√©sentes
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'screenshots/**/*.png'
+                    
+                    // Archiver les logs d√©taill√©s
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'test-results/*.txt'
+                    
+                    // Publier le rapport HTML si vous en avez un
+                    publishHTML(target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: 'test-results',
+                        reportFiles: 'selenium-report.html',
+                        reportName: 'Selenium Test Report'
+                    ])
+                }
+            }
+        }
+        
         stage('Build for Production') {
             steps {
-                echo 'PrÈparation pour la production...'
+                echo 'Pr√©paration pour la production...'
                 bat '''
-                    rem CrÈation du dossier de build
+                    rem Cr√©ation du dossier de build
                     if not exist dist mkdir dist
-
+                    
                     rem Copie des fichiers HTML
                     xcopy /y *.html dist\\
-
-                    rem Copie des fichiers CSS si prÈsents
+                    
+                    rem Copie des fichiers CSS si pr√©sents
                     if exist *.css xcopy /y *.css dist\\
-
-                    rem Copie des fichiers JS si prÈsents
+                    
+                    rem Copie des fichiers JS si pr√©sents
                     if exist *.js xcopy /y *.js dist\\
-
-                    rem Copie des images si prÈsentes
+                    
+                    rem Copie des images si pr√©sentes
                     if exist images xcopy /s /e /y images dist\\images\\
-
-                    rem Copie des fonts si prÈsentes
+                    
+                    rem Copie des fonts si pr√©sentes
                     if exist fonts xcopy /s /e /y fonts dist\\fonts\\
-
+                    
                     rem Afficher le contenu du dossier dist
                     echo Contenu du dossier dist :
                     dir /s /b dist
                 '''
             }
         }
-
+        
         stage('Archive Build') {
             steps {
                 echo 'Archivage du build...'
                 archiveArtifacts artifacts: 'dist/**/*', allowEmptyArchive: true
             }
         }
-
-        stage('Deploy to GitHub Pages') {
+        
+        stage('Deploy Simulation') {
             when {
                 branch 'main'
             }
             steps {
-                echo 'DÈploiement sur GitHub Pages...'
+                echo 'D√©ploiement simul√© du site...'
                 bat '''
-                    echo Le site est prÍt ‡ Ítre dÈployÈ depuis le dossier dist
-                    echo Vous pouvez copier le contenu vers le dÈpÙt GitHub pour dÈploiement
+                    echo Le site est pr√™t √† √™tre d√©ploy√© depuis le dossier dist
+                    echo Vous pouvez copier le contenu vers votre serveur web
                 '''
             }
         }
     }
-
+    
     post {
         success {
-            echo 'Pipeline exÈcutÈ avec succËs !'
+            echo 'Pipeline ex√©cut√© avec succ√®s !'
         }
         
         failure {
-            echo 'Pipeline ÈchouÈ !'
+            echo 'Pipeline √©chou√© !'
         }
         
         always {

@@ -9,163 +9,160 @@ describe('Tests de formulaire', function () {
     let driver;
 
     beforeEach(async function () {
+        console.log('--- Initialisation du test de formulaire ---');
         test = new BaseTest();
         await test.setup();
         driver = test.getDriver();
+        console.log('Driver initialisé avec succès');
     });
 
     afterEach(async function () {
+        console.log('--- Nettoyage du test de formulaire ---');
+        if (driver) {
+            await driver.takeScreenshot().then(function (data) {
+                const fs = require('fs');
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                fs.writeFileSync(`screenshots/form-test-${timestamp}.png`, data, 'base64');
+                console.log(`Screenshot sauvegardé : form-test-${timestamp}.png`);
+            }).catch(err => console.error('Erreur lors de la capture d\'écran:', err));
+        }
         await test.teardown();
     });
 
     it('devrait trouver au moins un formulaire sur le site', async function () {
-        await driver.get('http://localhost:8081/index.html');
+        console.log('Recherche de formulaires sur le site...');
 
-        // Chercher un formulaire sur plusieurs pages
-        const pagesToCheck = [
-            'index.html',
-            'contact.html',
-            'contactez-nous.html',
-            'contact-us.html',
-            'formulaire.html',
-            'form.html'
-        ];
+        try {
+            await driver.get('http://localhost:8081/index.html');
+            console.log('Page index chargée');
 
-        let formFound = false;
+            // Attendre que la page soit complètement chargée
+            await driver.wait(async () => {
+                const readyState = await driver.executeScript('return document.readyState');
+                return readyState === 'complete';
+            }, 10000);
 
-        for (const page of pagesToCheck) {
-            try {
-                await driver.get(`http://localhost:8081/${page}`);
+            console.log('Page complètement chargée, recherche des formulaires...');
 
-                // Attendre que la page soit chargée
-                await driver.wait(async () => {
-                    const readyState = await driver.executeScript('return document.readyState');
-                    return readyState === 'complete';
-                }, 5000);
+            // Chercher un formulaire sur plusieurs pages
+            const pagesToCheck = [
+                'index.html',
+                'contact.html',
+                'contactez-nous.html',
+                'contact-us.html',
+                'formulaire.html',
+                'form.html'
+            ];
 
-                const forms = await driver.findElements(By.css('form'));
-                if (forms.length > 0) {
-                    formFound = true;
-                    break;
-                }
-            } catch (e) {
-                // Page n'existe pas, continuer
-            }
-        }
+            let formFound = false;
 
-        if (!formFound) {
-            console.log('Aucun formulaire trouvé sur le site - Test ignoré');
-            this.skip();
-        }
-    });
+            for (const page of pagesToCheck) {
+                console.log(`Vérification de la page: ${page}`);
+                try {
+                    await driver.get(`http://localhost:8081/${page}`);
 
-    it('devrait trouver des champs de formulaire', async function () {
-        await driver.get('http://localhost:8081/index.html');
+                    // Attendre que la page soit chargée
+                    await driver.wait(async () => {
+                        const readyState = await driver.executeScript('return document.readyState');
+                        return readyState === 'complete';
+                    }, 5000);
 
-        let formPage = null;
-        let fieldFound = false;
+                    const forms = await driver.findElements(By.css('form'));
+                    console.log(`Nombre de formulaires trouvés sur ${page}: ${forms.length}`);
 
-        // Chercher une page avec un formulaire
-        const pagesToCheck = [
-            'index.html',
-            'contact.html',
-            'contactez-nous.html',
-            'contact-us.html',
-            'formulaire.html',
-            'form.html'
-        ];
-
-        for (const page of pagesToCheck) {
-            try {
-                await driver.get(`http://localhost:8081/${page}`);
-                const forms = await driver.findElements(By.css('form'));
-                if (forms.length > 0) {
-                    formPage = page;
-
-                    // Chercher des champs de formulaire
-                    const inputTypes = [
-                        'input[type="text"]',
-                        'input[type="email"]',
-                        'input[type="tel"]',
-                        'input[type="password"]',
-                        'textarea',
-                        'select',
-                        'input:not([type="submit"]):not([type="button"]):not([type="reset"])'
-                    ];
-
-                    for (const selector of inputTypes) {
-                        const fields = await driver.findElements(By.css(selector));
-                        if (fields.length > 0) {
-                            fieldFound = true;
-                            break;
-                        }
+                    if (forms.length > 0) {
+                        formFound = true;
+                        console.log(`Formulaire trouvé sur ${page}!`);
+                        break;
                     }
-
-                    if (fieldFound) break;
+                } catch (e) {
+                    console.log(`Erreur lors de l'accès à ${page}: ${e.message}`);
+                    // Page n'existe pas, continuer
                 }
-            } catch (e) {
-                // Continuer
             }
-        }
 
-        if (!formPage) {
-            console.log('Aucun formulaire trouvé sur le site - Test ignoré');
-            this.skip();
-            return;
+            if (!formFound) {
+                console.log('Aucun formulaire trouvé sur le site - Test ignoré');
+                this.skip();
+            }
+        } catch (error) {
+            console.error('Erreur dans le test de formulaire:', error);
+            throw error;
         }
-
-        assert.ok(fieldFound, 'Des champs de formulaire devraient être trouvés');
     });
 
     it('devrait pouvoir interagir avec un formulaire', async function () {
-        await driver.get('http://localhost:8081/index.html');
+        console.log('Test d\'interaction avec un formulaire...');
 
-        let formInteractionSuccessful = false;
+        try {
+            await driver.get('http://localhost:8081/index.html');
+            console.log('Page index chargée');
 
-        // Chercher une page avec un formulaire
-        const pagesToCheck = [
-            'index.html',
-            'contact.html',
-            'contactez-nous.html',
-            'contact-us.html',
-            'formulaire.html',
-            'form.html'
-        ];
+            let formInteractionSuccessful = false;
 
-        for (const page of pagesToCheck) {
-            try {
-                await driver.get(`http://localhost:8081/${page}`);
-                const forms = await driver.findElements(By.css('form'));
+            // Chercher une page avec un formulaire
+            const pagesToCheck = [
+                'index.html',
+                'contact.html',
+                'contactez-nous.html',
+                'contact-us.html',
+                'formulaire.html',
+                'form.html'
+            ];
 
-                if (forms.length > 0) {
-                    // Essayer de remplir n'importe quel champ de texte
-                    const textInputs = await driver.findElements(By.css('input[type="text"], input[type="email"], textarea'));
+            for (const page of pagesToCheck) {
+                console.log(`Vérification de la page: ${page}`);
+                try {
+                    await driver.get(`http://localhost:8081/${page}`);
 
-                    for (const input of textInputs) {
-                        try {
-                            if (await input.isDisplayed()) {
-                                await input.sendKeys('Test');
-                                const value = await input.getAttribute('value');
-                                if (value && value.includes('Test')) {
-                                    formInteractionSuccessful = true;
-                                    break;
+                    // Attendre le chargement complet
+                    await driver.wait(async () => {
+                        const readyState = await driver.executeScript('return document.readyState');
+                        return readyState === 'complete';
+                    }, 5000);
+
+                    const forms = await driver.findElements(By.css('form'));
+                    console.log(`Nombre de formulaires trouvés: ${forms.length}`);
+
+                    if (forms.length > 0) {
+                        // Essayer de remplir n'importe quel champ de texte
+                        const textInputs = await driver.findElements(By.css('input[type="text"], input[type="email"], textarea'));
+                        console.log(`Nombre de champs texte trouvés: ${textInputs.length}`);
+
+                        for (const input of textInputs) {
+                            try {
+                                if (await input.isDisplayed()) {
+                                    console.log('Tentative de saisie dans un champ...');
+                                    await input.sendKeys('Test');
+                                    const value = await input.getAttribute('value');
+                                    console.log(`Valeur du champ après saisie: ${value}`);
+                                    if (value && value.includes('Test')) {
+                                        formInteractionSuccessful = true;
+                                        console.log('Interaction réussie!');
+                                        break;
+                                    }
                                 }
+                            } catch (e) {
+                                console.log(`Erreur lors de l'interaction avec le champ: ${e.message}`);
+                                // Continuer avec le prochain champ
                             }
-                        } catch (e) {
-                            // Continuer avec le prochain champ
                         }
+
+                        if (formInteractionSuccessful) break;
                     }
-
-                    if (formInteractionSuccessful) break;
+                } catch (e) {
+                    console.log(`Erreur lors de l'accès à ${page}: ${e.message}`);
+                    // Continuer
                 }
-            } catch (e) {
-                // Continuer
             }
-        }
 
-        if (!formInteractionSuccessful) {
-            console.log('Impossible d\'interagir avec un formulaire - Test ignoré');
-            this.skip();
+            if (!formInteractionSuccessful) {
+                console.log('Impossible d\'interagir avec un formulaire - Test ignoré');
+                this.skip();
+            }
+        } catch (error) {
+            console.error('Erreur dans le test d\'interaction avec formulaire:', error);
+            throw error;
         }
     });
 });

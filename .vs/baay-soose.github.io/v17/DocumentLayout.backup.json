@@ -82,8 +82,7 @@
               "RelativeToolTip": "tests\\selenium\\startServer.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-19T09:44:15.72Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T09:44:15.72Z"
             },
             {
               "$type": "Document",
@@ -95,8 +94,7 @@
               "RelativeToolTip": "desktop.ini",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002768|",
-              "WhenOpened": "2025-04-19T09:14:37.093Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T09:14:37.093Z"
             },
             {
               "$type": "Document",
@@ -108,8 +106,7 @@
               "RelativeToolTip": ".gitignore",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-04-19T08:10:17.4Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T08:10:17.4Z"
             },
             {
               "$type": "Document",
@@ -121,8 +118,7 @@
               "RelativeToolTip": "init-package.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-19T07:53:48.01Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T07:53:48.01Z"
             },
             {
               "$type": "Document",
@@ -134,8 +130,7 @@
               "RelativeToolTip": "tests\\selenium\\homePageTest.js",
               "ViewState": "AgIAAF4AAAAAAAAAAAAywIAAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-19T07:52:15.521Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T07:52:15.521Z"
             },
             {
               "$type": "Document",
@@ -147,8 +142,7 @@
               "RelativeToolTip": "tests\\selenium\\runAllTests.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-19T07:51:28.842Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T07:51:28.842Z"
             },
             {
               "$type": "Document",
@@ -160,8 +154,7 @@
               "RelativeToolTip": "tests\\selenium\\mocha.config.js",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAACEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-19T07:51:15.944Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T07:51:15.944Z"
             },
             {
               "$type": "Document",
@@ -173,8 +166,7 @@
               "RelativeToolTip": "tests\\selenium\\config.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-19T07:51:03.185Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T07:51:03.185Z"
             },
             {
               "$type": "Document",
@@ -186,8 +178,7 @@
               "RelativeToolTip": "tests\\selenium\\formTest.js",
               "ViewState": "AgIAAIgAAAAAAAAAAAAywKoAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-19T07:50:38.629Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T07:50:38.629Z"
             },
             {
               "$type": "Document",
@@ -199,8 +190,7 @@
               "RelativeToolTip": "tests\\selenium\\navigationTest.js",
               "ViewState": "AgIAAG8AAAAAAAAAAAAywJEAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-19T07:50:04.67Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T07:50:04.67Z"
             },
             {
               "$type": "Document",
@@ -212,8 +202,7 @@
               "RelativeToolTip": "tests\\selenium\\baseTest.js",
               "ViewState": "AgIAAAIAAAAAAAAAAAAiwCIAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-19T07:49:33.56Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T07:49:33.56Z"
             },
             {
               "$type": "Document",
@@ -223,7 +212,7 @@
               "RelativeDocumentMoniker": "Jenkinsfile",
               "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\Jenkinsfile",
               "RelativeToolTip": "Jenkinsfile",
-              "ViewState": "AgIAAIgAAAAAAAAAAAAmwKsAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAmwLgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-04-19T06:09:09.812Z",
               "EditorCaption": ""

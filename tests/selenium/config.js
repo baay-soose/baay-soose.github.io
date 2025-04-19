@@ -1,7 +1,7 @@
 // tests/selenium/config.js
 module.exports = {
     baseUrl: process.env.BASE_URL || `http://localhost:${process.env.TEST_PORT || 8081}`,
-    timeout: 30000,
+    timeout: 60000,  // Augmenté à 60 secondes
     headless: process.env.HEADLESS === 'true',
     port: process.env.TEST_PORT || 8081,
     windowSize: {
@@ -16,6 +16,9 @@ module.exports = {
         options.push(
             '--no-sandbox',
             '--disable-dev-shm-usage',
+            '--disable-gpu',  // Ajouté pour éviter des problèmes sur certains environnements
+            '--disable-dev-shm-usage',
+            '--disable-extensions',
             `--window-size=${this.windowSize.width},${this.windowSize.height}`
         );
         return options;

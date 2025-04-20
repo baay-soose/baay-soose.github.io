@@ -50,7 +50,7 @@ setTimeout(() => {
             return file.endsWith('Test.js') &&
                 !file.startsWith('base') &&
                 !file.startsWith('config') &&
-                !file.startsWith('run') &&
+                !file.startsWith('run') //&&
                 //file !== 'formTest.js'; // Exclure formTest.js
         })
         .forEach(file => {

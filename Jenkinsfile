@@ -372,6 +372,7 @@ ansible_connection=local
     }
     
     always {
-        cleanWs()
+            cleanWs()
+        }
     }
 }

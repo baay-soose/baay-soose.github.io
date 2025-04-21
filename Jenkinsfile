@@ -10,12 +10,7 @@ pipeline {
         DEPLOY_ENV = 'production'
         TEST_PORT = '8081'
         CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application'
-        ANSIBLE_HOST_KEY_CHECKING = 'False'
         NEW_RELIC_LICENSE_KEY = credentials('new-relic-license-key')
-        // Forcer Python à ne pas utiliser les E/S en mode bloquant
-        PYTHONIOENCODING = 'utf-8'
-        PYTHONLEGACYWINDOWSSTDIO = '1'
-        ANSIBLE_STDOUT_CALLBACK = 'debug'
     }
     
     stages {
@@ -196,8 +191,8 @@ pipeline {
                     )
                     
                     rem Remplacer la clé dans les deux fichiers
-                    powershell -Command "(Get-Content 'js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '%NEW_RELIC_LICENSE_KEY%' | Set-Content 'js\\newrelic-monitoring.js'"
-                    powershell -Command "(Get-Content 'dist\\js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '%NEW_RELIC_LICENSE_KEY%' | Set-Content 'dist\\js\\newrelic-monitoring.js'"
+                    powershell -Command "(Get-Content 'js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '%%NEW_RELIC_LICENSE_KEY%%' | Set-Content 'js\\newrelic-monitoring.js'"
+                    powershell -Command "(Get-Content 'dist\\js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '%%NEW_RELIC_LICENSE_KEY%%' | Set-Content 'dist\\js\\newrelic-monitoring.js'"
                     
                     rem Injecter le script dans les fichiers HTML
                     powershell -Command "foreach ($file in Get-ChildItem dist\\*.html) { $content = Get-Content $file -Raw; $insertion = '<script src=\"js/newrelic-monitoring.js\"></script>'; $newContent = $content -replace '(<head>)', '$1' + \"`n  $insertion\"; Set-Content $file $newContent }"
@@ -212,23 +207,9 @@ pipeline {
             }
         }
         
-        
-        }
-        
-        stage('Deploy with Ansible') {
-    steps {
-        echo 'Déploiement avec Ansible via WSL...'
-        bat '''
-            rem Exécuter Ansible via WSL
-            wsl cd ~/ansible && ansible-playbook -i inventory.ini install-newrelic.yml -v
-            wsl cd ~/ansible && ansible-playbook -i inventory.ini deploy-website.yml -v
-        '''
-    }
-}
-        
-        stage('Direct Deployment Fallback') {
+        stage('Direct Deployment') {
             steps {
-                echo 'Déploiement direct (alternative à Ansible)...'
+                echo 'Déploiement direct de l\'application...'
                 bat '''
                     rem Créer le répertoire de déploiement s'il n'existe pas
                     if not exist "C:\\inetpub\\wwwroot\\baay-soose.github.io" mkdir "C:\\inetpub\\wwwroot\\baay-soose.github.io"
@@ -236,10 +217,15 @@ pipeline {
                     rem Copier les fichiers
                     xcopy /y /s /e dist\\* "C:\\inetpub\\wwwroot\\baay-soose.github.io\\"
                     
+                    rem Création du dossier js si nécessaire
+                    if not exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\js" mkdir "C:\\inetpub\\wwwroot\\baay-soose.github.io\\js"
+                    
                     rem Créer un fichier de configuration New Relic
                     echo license_key: %NEW_RELIC_LICENSE_KEY% > "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
                     echo app_name: %APP_NAME% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
                     echo environment: %DEPLOY_ENV% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
+                    
+                    echo Déploiement direct terminé avec succès!
                 '''
             }
         }
@@ -261,30 +247,30 @@ pipeline {
     }
     
     post {
-    success {
-        echo 'Pipeline exécuté avec succès !'
-        
-        // Notification en cas de succès
-        script {
-            if (env.DEPLOY_ENV == 'production') {
-                echo "Application déployée avec succès en PRODUCTION"
-                echo "Notification de déploiement envoyée à New Relic"
-            } else {
-                echo "Application déployée avec succès en STAGING"
+        success {
+            echo 'Pipeline exécuté avec succès !'
+            
+            // Notification en cas de succès
+            script {
+                if (env.DEPLOY_ENV == 'production') {
+                    echo "Application déployée avec succès en PRODUCTION"
+                    echo "Notification de déploiement envoyée à New Relic"
+                } else {
+                    echo "Application déployée avec succès en STAGING"
+                }
             }
         }
-    }
-    
-    failure {
-        echo 'Pipeline échoué !'
         
-        // Notification en cas d'échec
-        script {
-            echo "Échec du pipeline CI/CD"
+        failure {
+            echo 'Pipeline échoué !'
+            
+            // Notification en cas d'échec
+            script {
+                echo "Échec du pipeline CI/CD"
+            }
         }
-    }
-    
-    always {
+        
+        always {
             cleanWs()
         }
     }

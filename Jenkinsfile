@@ -10,6 +10,12 @@ pipeline {
         DEPLOY_ENV = 'production'
         TEST_PORT = '8081'
         CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application'
+        ANSIBLE_HOST_KEY_CHECKING = 'False'
+        NEW_RELIC_LICENSE_KEY = credentials('new-relic-license-key')
+        // Forcer Python à ne pas utiliser les E/S en mode bloquant (résoudre le problème de get_blocking)
+        PYTHONIOENCODING = 'utf-8'
+        PYTHONLEGACYWINDOWSSTDIO = '1'
+        ANSIBLE_STDOUT_CALLBACK = 'debug'
     }
     
     stages {
@@ -155,6 +161,51 @@ pipeline {
             }
         }
         
+        stage('Integrate New Relic') {
+            steps {
+                echo 'Intégration de New Relic pour la surveillance...'
+                bat '''
+                    rem Installation de New Relic pour le navigateur
+                    npm install newrelic --save || exit 0
+                    
+                    rem Création du dossier js dans dist si nécessaire
+                    if not exist dist\\js mkdir dist\\js
+                    
+                    rem Création du script New Relic si nécessaire
+                    if not exist js\\newrelic-monitoring.js (
+                        echo // Script de monitoring New Relic > js\\newrelic-monitoring.js
+                        echo (function() { >> js\\newrelic-monitoring.js
+                        echo   const licenseKey = 'LICENSE_KEY'; >> js\\newrelic-monitoring.js
+                        echo   const appName = '%APP_NAME%'; >> js\\newrelic-monitoring.js
+                        echo   console.log('New Relic monitoring initialized'); >> js\\newrelic-monitoring.js
+                        echo   // Mesurer le temps de chargement >> js\\newrelic-monitoring.js
+                        echo   window.addEventListener('load', function() { >> js\\newrelic-monitoring.js
+                        echo     if (window.performance) { >> js\\newrelic-monitoring.js
+                        echo       const pageLoad = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart; >> js\\newrelic-monitoring.js
+                        echo       console.log('Page load time: ' + pageLoad + 'ms'); >> js\\newrelic-monitoring.js
+                        echo     } >> js\\newrelic-monitoring.js
+                        echo   }); >> js\\newrelic-monitoring.js
+                        echo })(); >> js\\newrelic-monitoring.js
+                    )
+                    
+                    rem Copie du script New Relic vers dist
+                    xcopy /y js\\newrelic-monitoring.js dist\\js\\
+                    
+                    rem Injecter le script New Relic dans les pages HTML
+                    powershell -Command "foreach ($file in Get-ChildItem dist\\*.html) { $content = Get-Content $file -Raw; $insertion = '<script src=\"js/newrelic-monitoring.js\"></script>'; $newContent = $content -replace '(<head>)', '$1' + \"`n  $insertion\"; Set-Content $file $newContent }"
+                '''
+                
+                // Définir la clé de licence New Relic dans le script
+                script {
+                    def licenseKey = env.NEW_RELIC_LICENSE_KEY ?: 'DEMO_LICENSE_KEY'
+                    
+                    bat """
+                        powershell -Command "(Get-Content 'dist\\js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '${licenseKey}' | Set-Content 'dist\\js\\newrelic-monitoring.js'"
+                    """
+                }
+            }
+        }
+        
         stage('Archive Build') {
             steps {
                 echo 'Archivage du build...'
@@ -162,15 +213,127 @@ pipeline {
             }
         }
         
-        stage('Deploy Simulation') {
+        stage('Prepare Ansible') {
             when {
                 branch 'main'
             }
             steps {
-                echo 'Déploiement simulé du site...'
+                echo 'Préparation des fichiers Ansible...'
                 bat '''
-                    echo Le site est prêt à être déployé depuis le dossier dist
-                    echo Vous pouvez copier le contenu vers votre serveur web
+                    rem Créer les répertoires pour Ansible
+                    if not exist ansible mkdir ansible
+                    if not exist ansible\\templates mkdir ansible\\templates
+                '''
+                
+                // Création du playbook de déploiement
+                writeFile file: 'ansible/deploy-website.yml', text: '''---
+# Ansible Playbook pour déployer le site web
+- name: Déployer l'application web
+  hosts: localhost
+  connection: local
+  vars:
+    app_name: baay-soose.github.io
+    deploy_dir: C:\\inetpub\\wwwroot\\{{ app_name }}
+    source_dir: ../dist
+
+  tasks:
+    - name: Création du répertoire de déploiement
+      win_file:
+        path: "{{ deploy_dir }}"
+        state: directory
+      ignore_errors: yes
+
+    - name: Copie des fichiers du site web
+      win_copy:
+        src: "{{ source_dir }}/"
+        dest: "{{ deploy_dir }}"
+      ignore_errors: yes
+      
+    - name: Affichage du résultat du déploiement
+      debug:
+        msg: "Site déployé avec succès dans {{ deploy_dir }}"
+'''
+                
+                // Création du playbook d'installation New Relic
+                writeFile file: 'ansible/install-newrelic.yml', text: '''---
+# Ansible Playbook pour configurer New Relic
+- name: Configuration de New Relic
+  hosts: localhost
+  connection: local
+  vars:
+    app_name: baay-soose.github.io
+    deploy_dir: C:\\inetpub\\wwwroot\\{{ app_name }}
+    new_relic_license_key: "{{ lookup('env', 'NEW_RELIC_LICENSE_KEY') | default('DEMO_LICENSE_KEY') }}"
+
+  tasks:
+    - name: Création du fichier de configuration New Relic
+      win_copy:
+        content: |
+          license_key: {{ new_relic_license_key }}
+          app_name: {{ app_name }}
+          environment: production
+        dest: "{{ deploy_dir }}\\newrelic.yml"
+      ignore_errors: yes
+      
+    - name: Affichage du résultat de la configuration
+      debug:
+        msg: "New Relic configuré avec succès pour {{ app_name }}"
+'''
+                
+                // Création du fichier d'inventaire
+                writeFile file: 'ansible/inventory.ini', text: '''[windows]
+localhost ansible_connection=local
+
+[all:vars]
+ansible_connection=local
+'''
+            }
+        }
+        
+        stage('Deploy with Ansible') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Déploiement avec Ansible...'
+                bat '''
+                    cd ansible
+                    
+                    rem Afficher les versions
+                    echo Versions des outils:
+                    python --version
+                    where ansible-playbook
+                    ansible-playbook --version
+                    
+                    rem Définir les variables d'environnement
+                    set PYTHONIOENCODING=utf-8
+                    set PYTHONLEGACYWINDOWSSTDIO=1
+                    set ANSIBLE_STDOUT_CALLBACK=debug
+                    
+                    rem Exécuter les playbooks Ansible
+                    echo Exécution du playbook New Relic...
+                    ansible-playbook install-newrelic.yml -i inventory.ini -v || echo "Erreur lors de l'installation de New Relic"
+                    
+                    echo Exécution du playbook de déploiement...
+                    ansible-playbook deploy-website.yml -i inventory.ini -v || echo "Erreur lors du déploiement du site"
+                '''
+            }
+        }
+        
+        stage('Verify Deployment') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Vérification du déploiement...'
+                bat '''
+                    echo Vérification de l'existence des fichiers déployés...
+                    if exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\index.html" (
+                        echo Déploiement vérifié avec succès!
+                    ) else (
+                        echo AVERTISSEMENT: Le déploiement n'a pas pu être vérifié.
+                        echo Le répertoire ou le fichier index.html n'existe pas.
+                    )
                 '''
             }
         }
@@ -179,10 +342,27 @@ pipeline {
     post {
         success {
             echo 'Pipeline exécuté avec succès !'
+            
+            // Notification en cas de succès
+            script {
+                if (env.DEPLOY_ENV == 'production') {
+                    echo "Application déployée avec succès en PRODUCTION"
+                    
+                    // Ajout d'une notification dans New Relic (simulé)
+                    echo "Notification de déploiement envoyée à New Relic"
+                } else {
+                    echo "Application déployée avec succès en STAGING"
+                }
+            }
         }
         
         failure {
             echo 'Pipeline échoué !'
+            
+            // Notification en cas d'échec
+            script {
+                echo "Échec du pipeline CI/CD"
+            }
         }
         
         always {

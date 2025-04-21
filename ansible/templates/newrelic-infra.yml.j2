@@ -1,0 +1,10 @@
+---
+# Configuration de New Relic Infrastructure
+license_key: {{ new_relic_license_key }}
+display_name: {{ ansible_hostname }} - {{ app_name }}
+
+# Options de personnalisation de l'agent
+custom_attributes:
+  environment: {{ deploy_env | default('production') }}
+  app_name: {{ app_name }}
+  server_role: web_server

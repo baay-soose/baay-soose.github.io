@@ -1,0 +1,66 @@
+---
+# Ansible Playbook pour déployer le site web
+- name: Déployer l'application web
+  hosts: web_servers
+  become: yes
+  vars:
+    app_name: baay-soose.github.io
+    deploy_dir: /var/www/html/{{ app_name }}
+    source_dir: ./dist
+
+  tasks:
+    - name: Mise à jour des paquets
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Installation des dépendances
+      apt:
+        name:
+          - nginx
+          - nodejs
+          - npm
+        state: present
+
+    - name: Création du répertoire de déploiement
+      file:
+        path: "{{ deploy_dir }}"
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Copie des fichiers du site web
+      copy:
+        src: "{{ source_dir }}/"
+        dest: "{{ deploy_dir }}"
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: Configuration du site dans Nginx
+      template:
+        src: templates/nginx-site.conf.j2
+        dest: /etc/nginx/sites-available/{{ app_name }}
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Activation du site Nginx
+      file:
+        src: /etc/nginx/sites-available/{{ app_name }}
+        dest: /etc/nginx/sites-enabled/{{ app_name }}
+        state: link
+
+    - name: Redémarrage de Nginx
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes
+
+    - name: Vérification du déploiement
+      uri:
+        url: http://localhost
+        status_code: 200
+      register: deployment_check
+      failed_when: deployment_check.status != 200

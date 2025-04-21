@@ -1,0 +1,83 @@
+---
+# Ansible Playbook pour installer et configurer New Relic
+- name: Installation de New Relic
+  hosts: web_servers
+  become: yes
+  vars:
+    new_relic_license_key: "NRAK-UXEXXB22E15OK6YXUA9ERBF0XU9" # Remplacer par votre clé de licence New Relic
+    app_name: "baay-soose.github.io"
+
+  tasks:
+    # Installation de New Relic Infrastructure (surveillance du serveur)
+    - name: Ajouter la clé GPG de New Relic
+      apt_key:
+        url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
+        state: present
+
+    - name: Ajouter le dépôt New Relic
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.newrelic.com/infrastructure_agent/linux/apt focal main"
+        state: present
+        filename: newrelic-infra
+        update_cache: yes
+
+    - name: Installer New Relic Infrastructure Agent
+      apt:
+        name: newrelic-infra
+        state: present
+      environment:
+        NEW_RELIC_LICENSE_KEY: "{{ new_relic_license_key }}"
+
+    - name: Configurer New Relic Infrastructure Agent
+      template:
+        src: templates/newrelic-infra.yml.j2
+        dest: /etc/newrelic-infra.yml
+        owner: root
+        group: root
+        mode: '0640'
+      notify: Restart New Relic Infrastructure Agent
+
+    # Installation de New Relic APM pour surveillance des applications
+    - name: Installer Node.js et npm
+      apt:
+        name:
+          - nodejs
+          - npm
+        state: present
+
+    - name: Installer le package npm New Relic
+      npm:
+        name: newrelic
+        global: yes
+        state: present
+
+    - name: Créer le fichier de configuration New Relic
+      template:
+        src: templates/newrelic.js.j2
+        dest: /var/www/html/{{ app_name }}/js/newrelic.js
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: Vérifier que New Relic est configuré correctement
+      uri:
+        url: https://api.newrelic.com/v2/applications.json
+        method: GET
+        headers:
+          X-Api-Key: "{{ new_relic_license_key }}"
+        status_code: 200
+      register: new_relic_check
+      ignore_errors: yes
+      no_log: yes
+      delegate_to: localhost
+
+    - name: Afficher le statut de New Relic
+      debug:
+        msg: "New Relic est correctement configuré"
+      when: new_relic_check.status == 200
+
+  handlers:
+    - name: Restart New Relic Infrastructure Agent
+      service:
+        name: newrelic-infra
+        state: restarted

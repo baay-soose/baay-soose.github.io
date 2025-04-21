@@ -50,8 +50,8 @@ setTimeout(() => {
             return file.endsWith('Test.js') &&
                 !file.startsWith('base') &&
                 !file.startsWith('config') &&
-                !file.startsWith('run') //&&
-                file !== 'formTest.js'; // Exclure formTest.js
+                !file.startsWith('run') &&
+                 file !== 'formTest.js'; // Exclure formTest.js
         })
         .forEach(file => {
             console.log(`Ajout du test: ${file}`);

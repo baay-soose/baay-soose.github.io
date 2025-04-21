@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="54.876" tests="9" failures="1" skipped="2">
-  <testsuite name="Root Suite" timestamp="2025-04-20T12:05:11" tests="0" time="0.000" failures="0">
+<testsuites name="Mocha Tests" time="54.154" tests="9" failures="1" skipped="2">
+  <testsuite name="Root Suite" timestamp="2025-04-21T16:37:02" tests="0" time="0.000" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
   </testsuite>
-  <testsuite name="Tests de formulaire" timestamp="2025-04-20T12:05:11" tests="2" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\formTest.js" time="36.963" failures="1">
+  <testsuite name="Tests de formulaire" timestamp="2025-04-21T16:37:02" tests="2" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\formTest.js" time="36.909" failures="1">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
-    <testcase name="Tests de formulaire devrait trouver au moins un formulaire sur le site" time="1.807" classname="devrait trouver au moins un formulaire sur le site">
+    <testcase name="Tests de formulaire devrait trouver au moins un formulaire sur le site" time="1.029" classname="devrait trouver au moins un formulaire sur le site">
     </testcase>
-    <testcase name="Tests de formulaire devrait pouvoir interagir avec un formulaire" time="30.007" classname="devrait pouvoir interagir avec un formulaire">
+    <testcase name="Tests de formulaire devrait pouvoir interagir avec un formulaire" time="30.006" classname="devrait pouvoir interagir avec un formulaire">
       <failure message="Timeout of 30000ms exceeded. For async tests and hooks, ensure &quot;done()&quot; is called; if returning a Promise, ensure it resolves. (C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\formTest.js)" type="Error"><![CDATA[Error: Timeout of 30000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\formTest.js)
     at listOnTimeout (node:internal/timers:594:17)
     at process.processTimers (node:internal/timers:529:7)]]></failure>
     </testcase>
   </testsuite>
-  <testsuite name="Tests de la page d&apos;accueil" timestamp="2025-04-20T12:05:47" tests="4" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\homePageTest.js" time="10.520" failures="0">
+  <testsuite name="Tests de la page d&apos;accueil" timestamp="2025-04-21T16:37:39" tests="4" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\homePageTest.js" time="10.079" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
-    <testcase name="Tests de la page d&apos;accueil devrait charger la page d&apos;accueil avec un titre" time="1.291" classname="devrait charger la page d&apos;accueil avec un titre">
+    <testcase name="Tests de la page d&apos;accueil devrait charger la page d&apos;accueil avec un titre" time="0.890" classname="devrait charger la page d&apos;accueil avec un titre">
     </testcase>
-    <testcase name="Tests de la page d&apos;accueil devrait trouver au moins un �l�ment de navigation" time="1.203" classname="devrait trouver au moins un �l�ment de navigation">
+    <testcase name="Tests de la page d&apos;accueil devrait trouver au moins un �l�ment de navigation" time="0.968" classname="devrait trouver au moins un �l�ment de navigation">
     </testcase>
-    <testcase name="Tests de la page d&apos;accueil devrait avoir un �l�ment principal (h1 ou autre)" time="1.107" classname="devrait avoir un �l�ment principal (h1 ou autre)">
+    <testcase name="Tests de la page d&apos;accueil devrait avoir un �l�ment principal (h1 ou autre)" time="1.076" classname="devrait avoir un �l�ment principal (h1 ou autre)">
     </testcase>
-    <testcase name="Tests de la page d&apos;accueil devrait avoir un footer ou un �l�ment en bas de page" time="0.979" classname="devrait avoir un footer ou un �l�ment en bas de page">
+    <testcase name="Tests de la page d&apos;accueil devrait avoir un footer ou un �l�ment en bas de page" time="1.176" classname="devrait avoir un footer ou un �l�ment en bas de page">
     </testcase>
   </testsuite>
-  <testsuite name="Tests de navigation" timestamp="2025-04-20T12:05:58" tests="3" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\navigationTest.js" time="7.391" failures="0">
+  <testsuite name="Tests de navigation" timestamp="2025-04-21T16:37:49" tests="3" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\navigationTest.js" time="7.164" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
-    <testcase name="Tests de navigation devrait trouver des liens de navigation" time="0.963" classname="devrait trouver des liens de navigation">
+    <testcase name="Tests de navigation devrait trouver des liens de navigation" time="1.074" classname="devrait trouver des liens de navigation">
     </testcase>
   </testsuite>
 </testsuites>

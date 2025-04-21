@@ -12,7 +12,7 @@ pipeline {
         CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application'
         ANSIBLE_HOST_KEY_CHECKING = 'False'
         NEW_RELIC_LICENSE_KEY = credentials('new-relic-license-key')
-        // Forcer Python à ne pas utiliser les E/S en mode bloquant (résoudre le problème de get_blocking)
+        // Forcer Python à ne pas utiliser les E/S en mode bloquant
         PYTHONIOENCODING = 'utf-8'
         PYTHONLEGACYWINDOWSSTDIO = '1'
         ANSIBLE_STDOUT_CALLBACK = 'debug'
@@ -161,7 +161,49 @@ pipeline {
             }
         }
         
-        
+        stage('Integrate New Relic') {
+            steps {
+                echo 'Intégration de New Relic pour la surveillance...'
+                bat '''
+                    rem Installation de New Relic pour le navigateur
+                    npm install newrelic --save || exit 0
+                    
+                    rem Création des dossiers nécessaires
+                    if not exist js mkdir js
+                    if not exist dist\\js mkdir dist\\js
+                    
+                    rem Création du script New Relic de monitoring
+                    echo // Script de monitoring New Relic > js\\newrelic-monitoring.js
+                    echo (function() { >> js\\newrelic-monitoring.js
+                    echo   const licenseKey = 'LICENSE_KEY'; >> js\\newrelic-monitoring.js
+                    echo   const appName = '%APP_NAME%'; >> js\\newrelic-monitoring.js
+                    echo   console.log('New Relic monitoring initialized'); >> js\\newrelic-monitoring.js
+                    echo   // Mesurer le temps de chargement >> js\\newrelic-monitoring.js
+                    echo   window.addEventListener('load', function() { >> js\\newrelic-monitoring.js
+                    echo     if (window.performance) { >> js\\newrelic-monitoring.js
+                    echo       const pageLoad = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart; >> js\\newrelic-monitoring.js
+                    echo       console.log('Page load time: ' + pageLoad + 'ms'); >> js\\newrelic-monitoring.js
+                    echo     } >> js\\newrelic-monitoring.js
+                    echo   }); >> js\\newrelic-monitoring.js
+                    echo })(); >> js\\newrelic-monitoring.js
+                    
+                    rem Copier vers dist/js
+                    xcopy /y js\\newrelic-monitoring.js dist\\js\\
+                    
+                    rem Remplacer la clé de licence
+                    if "%NEW_RELIC_LICENSE_KEY%"=="" (
+                        set NEW_RELIC_LICENSE_KEY=DEMO_LICENSE_KEY
+                    )
+                    
+                    rem Remplacer la clé dans les deux fichiers
+                    powershell -Command "(Get-Content 'js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '%NEW_RELIC_LICENSE_KEY%' | Set-Content 'js\\newrelic-monitoring.js'"
+                    powershell -Command "(Get-Content 'dist\\js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '%NEW_RELIC_LICENSE_KEY%' | Set-Content 'dist\\js\\newrelic-monitoring.js'"
+                    
+                    rem Injecter le script dans les fichiers HTML
+                    powershell -Command "foreach ($file in Get-ChildItem dist\\*.html) { $content = Get-Content $file -Raw; $insertion = '<script src=\"js/newrelic-monitoring.js\"></script>'; $newContent = $content -replace '(<head>)', '$1' + \"`n  $insertion\"; Set-Content $file $newContent }"
+                '''
+            }
+        }
         
         stage('Archive Build') {
             steps {
@@ -171,9 +213,6 @@ pipeline {
         }
         
         stage('Prepare Ansible') {
-            when {
-                branch 'main'
-            }
             steps {
                 echo 'Préparation des fichiers Ansible...'
                 bat '''
@@ -248,9 +287,6 @@ ansible_connection=local
         }
         
         stage('Deploy with Ansible') {
-            when {
-                branch 'main'
-            }
             steps {
                 echo 'Déploiement avec Ansible...'
                 bat '''
@@ -277,10 +313,25 @@ ansible_connection=local
             }
         }
         
-        stage('Verify Deployment') {
-            when {
-                branch 'main'
+        stage('Direct Deployment Fallback') {
+            steps {
+                echo 'Déploiement direct (alternative à Ansible)...'
+                bat '''
+                    rem Créer le répertoire de déploiement s'il n'existe pas
+                    if not exist "C:\\inetpub\\wwwroot\\baay-soose.github.io" mkdir "C:\\inetpub\\wwwroot\\baay-soose.github.io"
+                    
+                    rem Copier les fichiers
+                    xcopy /y /s /e dist\\* "C:\\inetpub\\wwwroot\\baay-soose.github.io\\"
+                    
+                    rem Créer un fichier de configuration New Relic
+                    echo license_key: %NEW_RELIC_LICENSE_KEY% > "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
+                    echo app_name: %APP_NAME% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
+                    echo environment: %DEPLOY_ENV% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
+                '''
             }
+        }
+        
+        stage('Verify Deployment') {
             steps {
                 echo 'Vérification du déploiement...'
                 bat '''
@@ -295,85 +346,39 @@ ansible_connection=local
             }
         }
     }
-
-    stage('Integrate New Relic') {
-            steps {
-                echo 'Intégration de New Relic pour la surveillance...'
-                bat '''
-                    rem Installation de New Relic pour le navigateur
-                    npm install newrelic --save || exit 0
-                    
-                    rem Création du dossier js dans dist si nécessaire
-                    if not exist dist\\js mkdir dist\\js
-                    
-                    rem Création du script New Relic si nécessaire
-                    if not exist js\\newrelic-monitoring.js (
-                        echo // Script de monitoring New Relic > js\\newrelic-monitoring.js
-                        echo (function() { >> js\\newrelic-monitoring.js
-                        echo   const licenseKey = 'LICENSE_KEY'; >> js\\newrelic-monitoring.js
-                        echo   const appName = '%APP_NAME%'; >> js\\newrelic-monitoring.js
-                        echo   console.log('New Relic monitoring initialized'); >> js\\newrelic-monitoring.js
-                        echo   // Mesurer le temps de chargement >> js\\newrelic-monitoring.js
-                        echo   window.addEventListener('load', function() { >> js\\newrelic-monitoring.js
-                        echo     if (window.performance) { >> js\\newrelic-monitoring.js
-                        echo       const pageLoad = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart; >> js\\newrelic-monitoring.js
-                        echo       console.log('Page load time: ' + pageLoad + 'ms'); >> js\\newrelic-monitoring.js
-                        echo     } >> js\\newrelic-monitoring.js
-                        echo   }); >> js\\newrelic-monitoring.js
-                        echo })(); >> js\\newrelic-monitoring.js
-                    )
-                    
-                    rem Copie du script New Relic vers dist
-                    xcopy /y js\\newrelic-monitoring.js dist\\js\\
-                    
-                    rem Injecter le script New Relic dans les pages HTML
-                    powershell -Command "foreach ($file in Get-ChildItem dist\\*.html) { $content = Get-Content $file -Raw; $insertion = '<script src=\"js/newrelic-monitoring.js\"></script>'; $newContent = $content -replace '(<head>)', '$1' + \"`n  $insertion\"; Set-Content $file $newContent }"
-                '''
-                
-                // Définir la clé de licence New Relic dans le script
-                script {
-                    def licenseKey = env.NEW_RELIC_LICENSE_KEY ?: 'DEMO_LICENSE_KEY'
-                    
-                        bat '''
-                        if "%NEW_RELIC_LICENSE_KEY%"=="" (
-                            set NEW_RELIC_LICENSE_KEY=DEMO_LICENSE_KEY
-                        )
-    
-                        rem Remplacer la clé de licence dans le fichier
-                        powershell -Command "(Get-Content 'dist\\js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '%NEW_RELIC_LICENSE_KEY%' | Set-Content 'dist\\js\\newrelic-monitoring.js'"
-                    '''
-                }
-            }
-        }
     
     post {
         success {
-            echo 'Pipeline exécuté avec succès !'
-            
-            // Notification en cas de succès
-            script {
-                if (env.DEPLOY_ENV == 'production') {
-                    echo "Application déployée avec succès en PRODUCTION"
-                    
-                    // Ajout d'une notification dans New Relic (simulé)
-                    echo "Notification de déploiement envoyée à New Relic"
-                } else {
-                    echo "Application déployée avec succès en STAGING"
+            node {
+                echo 'Pipeline exécuté avec succès !'
+                
+                // Notification en cas de succès
+                script {
+                    if (env.DEPLOY_ENV == 'production') {
+                        echo "Application déployée avec succès en PRODUCTION"
+                        echo "Notification de déploiement envoyée à New Relic"
+                    } else {
+                        echo "Application déployée avec succès en STAGING"
+                    }
                 }
             }
         }
         
         failure {
-            echo 'Pipeline échoué !'
-            
-            // Notification en cas d'échec
-            script {
-                echo "Échec du pipeline CI/CD"
+            node {
+                echo 'Pipeline échoué !'
+                
+                // Notification en cas d'échec
+                script {
+                    echo "Échec du pipeline CI/CD"
+                }
             }
         }
         
         always {
-            cleanWs()
+            node {
+                cleanWs()
+            }
         }
     }
 }

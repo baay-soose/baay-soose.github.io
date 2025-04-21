@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\ansible",
-    "\\ansible\\templates",
-    "\\tests\\selenium",
-    "\\tests\\selenium\\formTest.js"
+    "\\ansible\\templates"
   ],
-  "SelectedNode": "\\ansible\\deploy-website.yml",
+  "SelectedNode": "\\index.html",
   "PreviewInSolutionExplorer": false
 }

@@ -15,5 +15,8 @@
     "mocha": "^10.8.2",
     "mocha-junit-reporter": "^2.2.1",
     "selenium-webdriver": "^4.31.0"
+  },
+  "dependencies": {
+    "newrelic": "^12.18.0"
   }
 }

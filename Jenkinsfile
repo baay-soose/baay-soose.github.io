@@ -348,37 +348,30 @@ ansible_connection=local
     }
     
     post {
-        success {
-            node {
-                echo 'Pipeline exécuté avec succès !'
-                
-                // Notification en cas de succès
-                script {
-                    if (env.DEPLOY_ENV == 'production') {
-                        echo "Application déployée avec succès en PRODUCTION"
-                        echo "Notification de déploiement envoyée à New Relic"
-                    } else {
-                        echo "Application déployée avec succès en STAGING"
-                    }
-                }
-            }
-        }
+    success {
+        echo 'Pipeline exécuté avec succès !'
         
-        failure {
-            node {
-                echo 'Pipeline échoué !'
-                
-                // Notification en cas d'échec
-                script {
-                    echo "Échec du pipeline CI/CD"
-                }
+        // Notification en cas de succès
+        script {
+            if (env.DEPLOY_ENV == 'production') {
+                echo "Application déployée avec succès en PRODUCTION"
+                echo "Notification de déploiement envoyée à New Relic"
+            } else {
+                echo "Application déployée avec succès en STAGING"
             }
         }
+    }
+    
+    failure {
+        echo 'Pipeline échoué !'
         
-        always {
-            node {
-                cleanWs()
-            }
+        // Notification en cas d'échec
+        script {
+            echo "Échec du pipeline CI/CD"
         }
+    }
+    
+    always {
+        cleanWs()
     }
 }

@@ -266,4 +266,3 @@ pipeline {
             cleanWs()
         }
     }
-}

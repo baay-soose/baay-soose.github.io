@@ -213,30 +213,52 @@ pipeline {
         }
         
         
+        }
         
-        
-        stage('Direct Deployment') {
+        stage('Deploy with Ansible') {
     steps {
-        echo 'Déploiement direct de l\'application...'
+        echo 'Déploiement avec Ansible via WSL...'
         bat '''
-            rem Créer le répertoire de déploiement s'il n'existe pas
-            if not exist "C:\\inetpub\\wwwroot\\baay-soose.github.io" mkdir "C:\\inetpub\\wwwroot\\baay-soose.github.io"
-            
-            rem Copier les fichiers
-            xcopy /y /s /e dist\\* "C:\\inetpub\\wwwroot\\baay-soose.github.io\\"
-            
-            rem Création du dossier js si nécessaire
-            if not exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\js" mkdir "C:\\inetpub\\wwwroot\\baay-soose.github.io\\js"
-            
-            rem Créer un fichier de configuration New Relic
-            echo license_key: %NEW_RELIC_LICENSE_KEY% > "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
-            echo app_name: %APP_NAME% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
-            echo environment: %DEPLOY_ENV% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
-            
-            echo Déploiement direct terminé avec succès!
+            rem Exécuter Ansible via WSL
+            wsl cd ~/ansible && ansible-playbook -i inventory.ini install-newrelic.yml -v
+            wsl cd ~/ansible && ansible-playbook -i inventory.ini deploy-website.yml -v
         '''
     }
 }
+        
+        stage('Direct Deployment Fallback') {
+            steps {
+                echo 'Déploiement direct (alternative à Ansible)...'
+                bat '''
+                    rem Créer le répertoire de déploiement s'il n'existe pas
+                    if not exist "C:\\inetpub\\wwwroot\\baay-soose.github.io" mkdir "C:\\inetpub\\wwwroot\\baay-soose.github.io"
+                    
+                    rem Copier les fichiers
+                    xcopy /y /s /e dist\\* "C:\\inetpub\\wwwroot\\baay-soose.github.io\\"
+                    
+                    rem Créer un fichier de configuration New Relic
+                    echo license_key: %NEW_RELIC_LICENSE_KEY% > "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
+                    echo app_name: %APP_NAME% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
+                    echo environment: %DEPLOY_ENV% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
+                '''
+            }
+        }
+        
+        stage('Verify Deployment') {
+            steps {
+                echo 'Vérification du déploiement...'
+                bat '''
+                    echo Vérification de l'existence des fichiers déployés...
+                    if exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\index.html" (
+                        echo Déploiement vérifié avec succès!
+                    ) else (
+                        echo AVERTISSEMENT: Le déploiement n'a pas pu être vérifié.
+                        echo Le répertoire ou le fichier index.html n'existe pas.
+                    )
+                '''
+            }
+        }
+    }
     
     post {
     success {
@@ -266,3 +288,4 @@ pipeline {
             cleanWs()
         }
     }
+}

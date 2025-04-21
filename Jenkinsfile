@@ -200,7 +200,7 @@ pipeline {
                     def licenseKey = env.NEW_RELIC_LICENSE_KEY ?: 'DEMO_LICENSE_KEY'
                     
                     bat """
-                        bat 'powershell -Command "(Get-Content \'dist\\js\\newrelic-monitoring.js\') -replace \'LICENSE_KEY\', \'%NEW_RELIC_LICENSE_KEY%\' | Set-Content \'dist\\js\\newrelic-monitoring.js\'"'
+                        powershell -Command "(Get-Content 'dist\\js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '${licenseKey}' | Set-Content 'dist\\js\\newrelic-monitoring.js'"
                     """
                 }
             }

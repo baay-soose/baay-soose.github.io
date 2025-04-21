@@ -1,10 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\tests",
+    "\\ansible",
+    "\\ansible\\templates",
     "\\tests\\selenium",
     "\\tests\\selenium\\formTest.js"
   ],
-  "SelectedNode": "\\Jenkinsfile",
+  "SelectedNode": "\\ansible\\deploy-website.yml",
   "PreviewInSolutionExplorer": false
 }

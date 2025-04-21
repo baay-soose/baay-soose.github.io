@@ -1,4 +1,4 @@
----
+
 # Ansible Playbook pour déployer le site web
 - name: Déployer l'application web
   hosts: web_servers

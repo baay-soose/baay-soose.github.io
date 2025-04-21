@@ -212,106 +212,47 @@ pipeline {
             }
         }
         
+        
         stage('Prepare Ansible') {
-            steps {
-                echo 'Préparation des fichiers Ansible...'
-                bat '''
-                    rem Créer les répertoires pour Ansible
-                    if not exist ansible mkdir ansible
-                    if not exist ansible\\templates mkdir ansible\\templates
-                '''
-                
-                // Création du playbook de déploiement
-                writeFile file: 'ansible/deploy-website.yml', text: '''---
-# Ansible Playbook pour déployer le site web
-- name: Déployer l'application web
-  hosts: localhost
-  connection: local
-  vars:
-    app_name: baay-soose.github.io
-    deploy_dir: C:\\inetpub\\wwwroot\\{{ app_name }}
-    source_dir: ../dist
-
-  tasks:
-    - name: Création du répertoire de déploiement
-      win_file:
-        path: "{{ deploy_dir }}"
-        state: directory
-      ignore_errors: yes
-
-    - name: Copie des fichiers du site web
-      win_copy:
-        src: "{{ source_dir }}/"
-        dest: "{{ deploy_dir }}"
-      ignore_errors: yes
-      
-    - name: Affichage du résultat du déploiement
-      debug:
-        msg: "Site déployé avec succès dans {{ deploy_dir }}"
+    steps {
+        echo 'Préparation des fichiers Ansible...'
+        bat '''
+            rem Créer les répertoires pour Ansible
+            if not exist ansible mkdir ansible
+            if not exist ansible\\templates mkdir ansible\\templates
+            
+            rem Copier les fichiers vers WSL
+            wsl mkdir -p ~/ansible
+        '''
+        
+        // Création du playbook de déploiement
+        writeFile file: 'ansible/deploy-website.yml', text: '''---
+# Contenu du playbook...
 '''
-                
-                // Création du playbook d'installation New Relic
-                writeFile file: 'ansible/install-newrelic.yml', text: '''---
-# Ansible Playbook pour configurer New Relic
-- name: Configuration de New Relic
-  hosts: localhost
-  connection: local
-  vars:
-    app_name: baay-soose.github.io
-    deploy_dir: C:\\inetpub\\wwwroot\\{{ app_name }}
-    new_relic_license_key: "{{ lookup('env', 'NEW_RELIC_LICENSE_KEY') | default('DEMO_LICENSE_KEY') }}"
-
-  tasks:
-    - name: Création du fichier de configuration New Relic
-      win_copy:
-        content: |
-          license_key: {{ new_relic_license_key }}
-          app_name: {{ app_name }}
-          environment: production
-        dest: "{{ deploy_dir }}\\newrelic.yml"
-      ignore_errors: yes
-      
-    - name: Affichage du résultat de la configuration
-      debug:
-        msg: "New Relic configuré avec succès pour {{ app_name }}"
+        
+        // Création du playbook d'installation New Relic
+        writeFile file: 'ansible/install-newrelic.yml', text: '''---
+# Contenu du playbook...
 '''
-                
-                // Création du fichier d'inventaire
-                writeFile file: 'ansible/inventory.ini', text: '''[windows]
-localhost ansible_connection=local
-
-[all:vars]
-ansible_connection=local
-'''
-            }
-        }
+        
+        // Copier les fichiers vers WSL
+        bat '''
+            type ansible\\deploy-website.yml | wsl tee ~/ansible/deploy-website.yml > nul
+            type ansible\\install-newrelic.yml | wsl tee ~/ansible/install-newrelic.yml > nul
+        '''
+    }
+}
         
         stage('Deploy with Ansible') {
-            steps {
-                echo 'Déploiement avec Ansible...'
-                bat '''
-                    cd ansible
-                    
-                    rem Afficher les versions
-                    echo Versions des outils:
-                    python --version
-                    where ansible-playbook
-                    ansible-playbook --version
-                    
-                    rem Définir les variables d'environnement
-                    set PYTHONIOENCODING=utf-8
-                    set PYTHONLEGACYWINDOWSSTDIO=1
-                    set ANSIBLE_STDOUT_CALLBACK=debug
-                    
-                    rem Exécuter les playbooks Ansible
-                    echo Exécution du playbook New Relic...
-                    ansible-playbook install-newrelic.yml -i inventory.ini -v || echo "Erreur lors de l'installation de New Relic"
-                    
-                    echo Exécution du playbook de déploiement...
-                    ansible-playbook deploy-website.yml -i inventory.ini -v || echo "Erreur lors du déploiement du site"
-                '''
-            }
-        }
+    steps {
+        echo 'Déploiement avec Ansible via WSL...'
+        bat '''
+            rem Exécuter Ansible via WSL
+            wsl cd ~/ansible && ansible-playbook -i inventory.ini install-newrelic.yml -v
+            wsl cd ~/ansible && ansible-playbook -i inventory.ini deploy-website.yml -v
+        '''
+    }
+}
         
         stage('Direct Deployment Fallback') {
             steps {

@@ -161,55 +161,7 @@ pipeline {
             }
         }
         
-        stage('Integrate New Relic') {
-            steps {
-                echo 'Intégration de New Relic pour la surveillance...'
-                bat '''
-                    rem Installation de New Relic pour le navigateur
-                    npm install newrelic --save || exit 0
-                    
-                    rem Création du dossier js dans dist si nécessaire
-                    if not exist dist\\js mkdir dist\\js
-                    
-                    rem Création du script New Relic si nécessaire
-                    if not exist js\\newrelic-monitoring.js (
-                        echo // Script de monitoring New Relic > js\\newrelic-monitoring.js
-                        echo (function() { >> js\\newrelic-monitoring.js
-                        echo   const licenseKey = 'LICENSE_KEY'; >> js\\newrelic-monitoring.js
-                        echo   const appName = '%APP_NAME%'; >> js\\newrelic-monitoring.js
-                        echo   console.log('New Relic monitoring initialized'); >> js\\newrelic-monitoring.js
-                        echo   // Mesurer le temps de chargement >> js\\newrelic-monitoring.js
-                        echo   window.addEventListener('load', function() { >> js\\newrelic-monitoring.js
-                        echo     if (window.performance) { >> js\\newrelic-monitoring.js
-                        echo       const pageLoad = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart; >> js\\newrelic-monitoring.js
-                        echo       console.log('Page load time: ' + pageLoad + 'ms'); >> js\\newrelic-monitoring.js
-                        echo     } >> js\\newrelic-monitoring.js
-                        echo   }); >> js\\newrelic-monitoring.js
-                        echo })(); >> js\\newrelic-monitoring.js
-                    )
-                    
-                    rem Copie du script New Relic vers dist
-                    xcopy /y js\\newrelic-monitoring.js dist\\js\\
-                    
-                    rem Injecter le script New Relic dans les pages HTML
-                    powershell -Command "foreach ($file in Get-ChildItem dist\\*.html) { $content = Get-Content $file -Raw; $insertion = '<script src=\"js/newrelic-monitoring.js\"></script>'; $newContent = $content -replace '(<head>)', '$1' + \"`n  $insertion\"; Set-Content $file $newContent }"
-                '''
-                
-                // Définir la clé de licence New Relic dans le script
-                script {
-                    def licenseKey = env.NEW_RELIC_LICENSE_KEY ?: 'DEMO_LICENSE_KEY'
-                    
-                        bat '''
-                        if "%NEW_RELIC_LICENSE_KEY%"=="" (
-                            set NEW_RELIC_LICENSE_KEY=DEMO_LICENSE_KEY
-                        )
-    
-                        rem Remplacer la clé de licence dans le fichier
-                        powershell -Command "(Get-Content 'dist\\js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '%NEW_RELIC_LICENSE_KEY%' | Set-Content 'dist\\js\\newrelic-monitoring.js'"
-                    '''
-                }
-            }
-        }
+        
         
         stage('Archive Build') {
             steps {
@@ -343,6 +295,56 @@ ansible_connection=local
             }
         }
     }
+
+    stage('Integrate New Relic') {
+            steps {
+                echo 'Intégration de New Relic pour la surveillance...'
+                bat '''
+                    rem Installation de New Relic pour le navigateur
+                    npm install newrelic --save || exit 0
+                    
+                    rem Création du dossier js dans dist si nécessaire
+                    if not exist dist\\js mkdir dist\\js
+                    
+                    rem Création du script New Relic si nécessaire
+                    if not exist js\\newrelic-monitoring.js (
+                        echo // Script de monitoring New Relic > js\\newrelic-monitoring.js
+                        echo (function() { >> js\\newrelic-monitoring.js
+                        echo   const licenseKey = 'LICENSE_KEY'; >> js\\newrelic-monitoring.js
+                        echo   const appName = '%APP_NAME%'; >> js\\newrelic-monitoring.js
+                        echo   console.log('New Relic monitoring initialized'); >> js\\newrelic-monitoring.js
+                        echo   // Mesurer le temps de chargement >> js\\newrelic-monitoring.js
+                        echo   window.addEventListener('load', function() { >> js\\newrelic-monitoring.js
+                        echo     if (window.performance) { >> js\\newrelic-monitoring.js
+                        echo       const pageLoad = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart; >> js\\newrelic-monitoring.js
+                        echo       console.log('Page load time: ' + pageLoad + 'ms'); >> js\\newrelic-monitoring.js
+                        echo     } >> js\\newrelic-monitoring.js
+                        echo   }); >> js\\newrelic-monitoring.js
+                        echo })(); >> js\\newrelic-monitoring.js
+                    )
+                    
+                    rem Copie du script New Relic vers dist
+                    xcopy /y js\\newrelic-monitoring.js dist\\js\\
+                    
+                    rem Injecter le script New Relic dans les pages HTML
+                    powershell -Command "foreach ($file in Get-ChildItem dist\\*.html) { $content = Get-Content $file -Raw; $insertion = '<script src=\"js/newrelic-monitoring.js\"></script>'; $newContent = $content -replace '(<head>)', '$1' + \"`n  $insertion\"; Set-Content $file $newContent }"
+                '''
+                
+                // Définir la clé de licence New Relic dans le script
+                script {
+                    def licenseKey = env.NEW_RELIC_LICENSE_KEY ?: 'DEMO_LICENSE_KEY'
+                    
+                        bat '''
+                        if "%NEW_RELIC_LICENSE_KEY%"=="" (
+                            set NEW_RELIC_LICENSE_KEY=DEMO_LICENSE_KEY
+                        )
+    
+                        rem Remplacer la clé de licence dans le fichier
+                        powershell -Command "(Get-Content 'dist\\js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '%NEW_RELIC_LICENSE_KEY%' | Set-Content 'dist\\js\\newrelic-monitoring.js'"
+                    '''
+                }
+            }
+        }
     
     post {
         success {

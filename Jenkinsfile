@@ -193,6 +193,29 @@ pipeline {
                 '''
             }
         }
+
+        stage('Integrate Dynatrace Monitoring') {
+    steps {
+        echo 'Intégration de Dynatrace RUM pour la surveillance...'
+        bat '''
+            rem Création d'un script de surveillance Dynatrace
+            echo // Dynatrace RUM Monitoring > js\\dynatrace-rum.js
+            echo // Remplacez ce contenu par le code JavaScript fourni par Dynatrace >> js\\dynatrace-rum.js
+            echo (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': >> js\\dynatrace-rum.js
+            echo new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], >> js\\dynatrace-rum.js
+            echo j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= >> js\\dynatrace-rum.js
+            echo 'https://your-environment-id.live.dynatrace.com/js/your-app-id.js'+dl;f.parentNode.insertBefore(j,f); >> js\\dynatrace-rum.js
+            echo })(window,document,'script','dataLayer','YOUR-APP-ID'); >> js\\dynatrace-rum.js
+            
+            rem Copier vers dist/js
+            if not exist dist\\js mkdir dist\\js
+            xcopy /y js\\dynatrace-rum.js dist\\js\\
+            
+            rem Injecter le script dans les fichiers HTML
+            powershell -Command "foreach ($file in Get-ChildItem dist\\*.html) { $content = Get-Content $file -Raw; $insertion = '<script src=\"js/dynatrace-rum.js\"></script>'; $newContent = $content -replace '(<head>)', '$1' + \"`n  $insertion\"; Set-Content $file $newContent }"
+        '''
+    }
+}
         
         stage('Archive Build') {
             steps {

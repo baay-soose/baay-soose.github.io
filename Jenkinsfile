@@ -122,33 +122,36 @@ pipeline {
         }
         
         stage('Build for Production') {
-            steps {
-                echo 'Préparation pour la production...'
-                bat '''
-                    rem Création du dossier de build
-                    if not exist dist mkdir dist
-                    
-                    rem Copie des fichiers HTML
-                    xcopy /y *.html dist\\
-                    
-                    rem Copie des fichiers CSS si présents
-                    if exist *.css xcopy /y *.css dist\\
-                    
-                    rem Copie des fichiers JS si présents
-                    if exist *.js xcopy /y *.js dist\\
-                    
-                    rem Copie des images si présents
-                    if exist images xcopy /s /e /y images dist\\images\\
-                    
-                    rem Copie des fonts si présentes
-                    if exist fonts xcopy /s /e /y fonts dist\\fonts\\
-                    
-                    rem Afficher le contenu du dossier dist
-                    echo Contenu du dossier dist :
-                    dir /s /b dist
-                '''
-            }
-        }
+    steps {
+        echo 'Préparation pour la production...'
+        bat '''
+            rem Création du dossier de build
+            if not exist dist mkdir dist
+            
+            rem Copie des fichiers HTML
+            xcopy /y *.html dist\\
+            
+            rem Copie des dossiers CSS
+            if exist css xcopy /s /e /y css dist\\css\\
+            
+            rem Copie des dossiers JS
+            if exist js xcopy /s /e /y js dist\\js\\
+            
+            rem Copie du dossier contactform
+            if exist contactform xcopy /s /e /y contactform dist\\contactform\\
+            
+            rem Copie des images
+            if exist img xcopy /s /e /y img dist\\img\\
+            
+            rem Copie des fonts
+            if exist fonts xcopy /s /e /y fonts dist\\fonts\\
+            
+            rem Afficher le contenu du dossier dist
+            echo Contenu du dossier dist :
+            dir /s /b dist
+        '''
+    }
+}
         
         stage('Integrate New Relic') {
             steps {
@@ -251,27 +254,51 @@ pipeline {
         }
         
         stage('Direct Deployment') {
-            steps {
-                echo 'Déploiement direct de l\'application...'
-                bat '''
-                    rem Créer le répertoire de déploiement s'il n'existe pas
-                    if not exist "C:\\inetpub\\wwwroot\\baay-soose.github.io" mkdir "C:\\inetpub\\wwwroot\\baay-soose.github.io"
-                    
-                    rem Copier les fichiers
-                    xcopy /y /s /e dist\\* "C:\\inetpub\\wwwroot\\baay-soose.github.io\\"
-                    
-                    rem Création du dossier js si nécessaire
-                    if not exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\js" mkdir "C:\\inetpub\\wwwroot\\baay-soose.github.io\\js"
-                    
-                    rem Créer un fichier de configuration New Relic
-                    echo license_key: %NEW_RELIC_LICENSE_KEY% > "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
-                    echo app_name: %APP_NAME% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
-                    echo environment: %DEPLOY_ENV% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
-                    
-                    echo Déploiement direct terminé avec succès!
-                '''
-            }
-        }
+    steps {
+        echo 'Déploiement direct de l\'application...'
+        bat '''
+            rem Créer le répertoire de déploiement s'il n'existe pas
+            if not exist "C:\\inetpub\\wwwroot\\baay-soose.github.io" mkdir "C:\\inetpub\\wwwroot\\baay-soose.github.io"
+            
+            rem Copier tous les fichiers
+            xcopy /y /s /e dist\\* "C:\\inetpub\\wwwroot\\baay-soose.github.io\\"
+            
+            rem Vérifier que les dossiers importants ont été copiés
+            echo Vérification des dossiers après déploiement:
+            
+            if exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\css" (
+                echo ✓ Dossier CSS trouvé
+            ) else (
+                echo ✗ Dossier CSS non trouvé!
+            )
+            
+            if exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\js" (
+                echo ✓ Dossier JS trouvé
+            ) else (
+                echo ✗ Dossier JS non trouvé!
+            )
+            
+            if exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\img" (
+                echo ✓ Dossier Images trouvé
+            ) else (
+                echo ✗ Dossier Images non trouvé!
+            )
+            
+            if exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\fonts" (
+                echo ✓ Dossier Fonts trouvé
+            ) else (
+                echo ✗ Dossier Fonts non trouvé!
+            )
+            
+            rem Créer un fichier de configuration New Relic
+            echo license_key: %NEW_RELIC_LICENSE_KEY% > "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
+            echo app_name: %APP_NAME% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
+            echo environment: %DEPLOY_ENV% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
+            
+            echo Déploiement direct terminé avec succès!
+        '''
+    }
+}
         
         stage('Verify Deployment') {
             steps {

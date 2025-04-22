@@ -1,6 +1,6 @@
 
-# Ansible Playbook pour déployer le site web
-- name: Déployer l'application web
+# Ansible Playbook pour d?ployer le site web
+- name: D?ployer l'application web
   hosts: web_servers
   become: yes
   vars:
@@ -9,12 +9,12 @@
     source_dir: ./dist
 
   tasks:
-    - name: Mise à jour des paquets
+    - name: Mise ? jour des paquets
       apt:
         update_cache: yes
         cache_valid_time: 3600
 
-    - name: Installation des dépendances
+    - name: Installation des d?pendances
       apt:
         name:
           - nginx
@@ -22,7 +22,7 @@
           - npm
         state: present
 
-    - name: Création du répertoire de déploiement
+    - name: Cr?ation du r?pertoire de d?ploiement
       file:
         path: "{{ deploy_dir }}"
         state: directory
@@ -52,13 +52,13 @@
         dest: /etc/nginx/sites-enabled/{{ app_name }}
         state: link
 
-    - name: Redémarrage de Nginx
+    - name: Red?marrage de Nginx
       service:
         name: nginx
         state: restarted
         enabled: yes
 
-    - name: Vérification du déploiement
+    - name: V?rification du d?ploiement
       uri:
         url: http://localhost
         status_code: 200

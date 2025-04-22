@@ -12,14 +12,6 @@ pipeline {
         CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application'
         NEW_RELIC_LICENSE_KEY = credentials('new-relic-license-key')
     }
-    
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', 
-                    url: 'https://github.com/baay-soose/baay-soose.github.io.git'
-            }
-        }
         
         stage('List Files') {
             steps {

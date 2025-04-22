@@ -1,4 +1,4 @@
-pipeline {
+ï»¿pipeline {
     agent any
     
     tools {
@@ -34,10 +34,10 @@ pipeline {
             steps {
                 echo 'Validation des fichiers HTML...'
                 bat '''
-                    echo Vérification de l'existence des fichiers HTML
+                    echo VÃ©rification de l'existence des fichiers HTML
                     dir /b *.html
                     
-                    echo Total des fichiers HTML trouvés :
+                    echo Total des fichiers HTML trouvÃ©s :
                     dir /b *.html | find /c /v ""
                 '''
             }
@@ -45,7 +45,7 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                echo 'Installation des dépendances...'
+                echo 'Installation des dÃ©pendances...'
                 bat '''
                     npm install || exit 0
                 '''
@@ -54,16 +54,16 @@ pipeline {
         
         stage('Lint CSS and JavaScript') {
             steps {
-                echo 'Vérification du CSS et JavaScript...'
+                echo 'VÃ©rification du CSS et JavaScript...'
                 
                 bat '''
                     rem Installation des linters
                     npm install --save-dev eslint stylelint || exit 0
                     
-                    rem Création de la configuration ESLint
+                    rem CrÃ©ation de la configuration ESLint
                     echo { "env": { "browser": true }, "extends": "eslint:recommended" } > .eslintrc.json
                     
-                    rem Exécution des linters
+                    rem ExÃ©cution des linters
                     if exist *.js (
                         npx eslint *.js || exit 0
                     )
@@ -79,13 +79,13 @@ pipeline {
             steps {
                 echo 'Configuration des tests Selenium...'
                 bat '''
-                    rem Créer le dossier tests s'il n'existe pas
+                    rem CrÃ©er le dossier tests s'il n'existe pas
                     if not exist tests\\selenium mkdir tests\\selenium
                     
-                    rem Installer les dépendances Selenium
+                    rem Installer les dÃ©pendances Selenium
                     npm install mocha selenium-webdriver chromedriver mocha-junit-reporter --save-dev || exit 0
                     
-                    rem Créer le package.json si nécessaire
+                    rem CrÃ©er le package.json si nÃ©cessaire
                     if not exist package.json (
                         npm init -y
                     )
@@ -95,79 +95,82 @@ pipeline {
         
         stage('Run Selenium Tests') {
             steps {
-                echo 'Exécution des tests Selenium...'
+                echo 'ExÃ©cution des tests Selenium...'
                 bat '''
-                    rem Définir le port pour les tests
+                    rem DÃ©finir le port pour les tests
                     set TEST_PORT=8081
                     
-                    rem Créer le répertoire pour les résultats des tests
+                    rem CrÃ©er le rÃ©pertoire pour les rÃ©sultats des tests
                     if not exist test-results mkdir test-results
                     
-                    rem Créer le répertoire pour les captures d'écran
+                    rem CrÃ©er le rÃ©pertoire pour les captures d'Ã©cran
                     if not exist screenshots mkdir screenshots
                     
-                    rem Vérifier que Node.js est disponible
+                    rem VÃ©rifier que Node.js est disponible
                     node --version
                     
-                    rem Exécuter les tests avec le script runAllTests.js
-                    node tests/selenium/runAllTests.js || echo "Échec des tests Selenium"
+                    rem ExÃ©cuter les tests avec le script runAllTests.js
+                    node tests/selenium/runAllTests.js || echo "Ã‰chec des tests Selenium"
                 '''
             }
             post {
                 always {
-                    // Archiver les résultats des tests
+                    // Archiver les rÃ©sultats des tests
                     junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
                     
-                    // Archiver les captures d'écran si présentes
+                    // Archiver les captures d'Ã©cran si prÃ©sentes
                     archiveArtifacts allowEmptyArchive: true, artifacts: 'screenshots/**/*.png'
                     
-                    // Archiver les logs détaillés
+                    // Archiver les logs dÃ©taillÃ©s
                     archiveArtifacts allowEmptyArchive: true, artifacts: 'test-results/*.txt'
                 }
             }
         }
         
         stage('Build for Production') {
-            steps {
-                echo 'Préparation pour la production...'
-                bat '''
-                    rem Création du dossier de build
-                    if not exist dist mkdir dist
-                    
-                    rem Copie des fichiers HTML
-                    xcopy /y *.html dist\\
-                    
-                    rem Copie des fichiers CSS si présents
-                    if exist *.css xcopy /y *.css dist\\
-                    
-                    rem Copie des fichiers JS si présents
-                    if exist *.js xcopy /y *.js dist\\
-                    
-                    rem Copie des images si présents
-                    if exist images xcopy /s /e /y images dist\\images\\
-                    
-                    rem Copie des fonts si présentes
-                    if exist fonts xcopy /s /e /y fonts dist\\fonts\\
-                    
-                    rem Afficher le contenu du dossier dist
-                    echo Contenu du dossier dist :
-                    dir /s /b dist
-                '''
-            }
-        }
+    steps {
+        echo 'PrÃ©paration pour la production...'
+        bat '''
+            rem CrÃ©ation du dossier de build
+            if not exist dist mkdir dist
+            
+            rem Copie des fichiers HTML
+            xcopy /y *.html dist\\
+            
+            rem Copie des dossiers CSS
+            if exist css xcopy /s /e /y css dist\\css\\
+            
+            rem Copie des dossiers JS
+            if exist js xcopy /s /e /y js dist\\js\\
+            
+            rem Copie du dossier contactform
+            if exist contactform xcopy /s /e /y contactform dist\\contactform\\
+            
+            rem Copie des images
+            if exist img xcopy /s /e /y img dist\\img\\
+            
+            rem Copie des fonts
+            if exist fonts xcopy /s /e /y fonts dist\\fonts\\
+            
+            rem Afficher le contenu du dossier dist
+            echo Contenu du dossier dist :
+            dir /s /b dist
+        '''
+    }
+}
         
         stage('Integrate New Relic') {
             steps {
-                echo 'Intégration de New Relic pour la surveillance...'
+                echo 'IntÃ©gration de New Relic pour la surveillance...'
                 bat '''
                     rem Installation de New Relic pour le navigateur
                     npm install newrelic --save || exit 0
                     
-                    rem Création des dossiers nécessaires
+                    rem CrÃ©ation des dossiers nÃ©cessaires
                     if not exist js mkdir js
                     if not exist dist\\js mkdir dist\\js
                     
-                    rem Création du script New Relic de monitoring
+                    rem CrÃ©ation du script New Relic de monitoring
                     echo // Script de monitoring New Relic > js\\newrelic-monitoring.js
                     echo (function() { >> js\\newrelic-monitoring.js
                     echo   const licenseKey = 'LICENSE_KEY'; >> js\\newrelic-monitoring.js
@@ -185,12 +188,12 @@ pipeline {
                     rem Copier vers dist/js
                     xcopy /y js\\newrelic-monitoring.js dist\\js\\
                     
-                    rem Remplacer la clé de licence
+                    rem Remplacer la clÃ© de licence
                     if "%NEW_RELIC_LICENSE_KEY%"=="" (
                         set NEW_RELIC_LICENSE_KEY=DEMO_LICENSE_KEY
                     )
                     
-                    rem Remplacer la clé dans les deux fichiers
+                    rem Remplacer la clÃ© dans les deux fichiers
                     powershell -Command "(Get-Content 'js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '%%NEW_RELIC_LICENSE_KEY%%' | Set-Content 'js\\newrelic-monitoring.js'"
                     powershell -Command "(Get-Content 'dist\\js\\newrelic-monitoring.js') -replace 'LICENSE_KEY', '%%NEW_RELIC_LICENSE_KEY%%' | Set-Content 'dist\\js\\newrelic-monitoring.js'"
                     
@@ -207,39 +210,63 @@ pipeline {
             }
         }
         
-        stage('Direct Deployment') {
+                stage('Direct Deployment') {
             steps {
-                echo 'Déploiement direct de l\'application...'
+                echo 'DÃ©ploiement direct de l\'application...'
                 bat '''
-                    rem Créer le répertoire de déploiement s'il n'existe pas
+                    rem CrÃ©er le rÃ©pertoire de dÃ©ploiement s'il n'existe pas
                     if not exist "C:\\inetpub\\wwwroot\\baay-soose.github.io" mkdir "C:\\inetpub\\wwwroot\\baay-soose.github.io"
-                    
-                    rem Copier les fichiers
+            
+                    rem Copier tous les fichiers
                     xcopy /y /s /e dist\\* "C:\\inetpub\\wwwroot\\baay-soose.github.io\\"
-                    
-                    rem Création du dossier js si nécessaire
-                    if not exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\js" mkdir "C:\\inetpub\\wwwroot\\baay-soose.github.io\\js"
-                    
-                    rem Créer un fichier de configuration New Relic
+            
+                    rem VÃ©rifier que les dossiers importants ont Ã©tÃ© copiÃ©s
+                    echo VÃ©rification des dossiers aprÃ¨s dÃ©ploiement:
+            
+                    if exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\css" (
+                        echo âœ“ Dossier CSS trouvÃ©
+                    ) else (
+                        echo âœ— Dossier CSS non trouvÃ©!
+                    )
+            
+                    if exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\js" (
+                        echo âœ“ Dossier JS trouvÃ©
+                    ) else (
+                        echo âœ— Dossier JS non trouvÃ©!
+                    )
+            
+                    if exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\img" (
+                        echo âœ“ Dossier Images trouvÃ©
+                    ) else (
+                        echo âœ— Dossier Images non trouvÃ©!
+                    )
+            
+                    if exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\fonts" (
+                        echo âœ“ Dossier Fonts trouvÃ©
+                    ) else (
+                        echo âœ— Dossier Fonts non trouvÃ©!
+                    )
+            
+                    rem CrÃ©er un fichier de configuration New Relic
                     echo license_key: %NEW_RELIC_LICENSE_KEY% > "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
                     echo app_name: %APP_NAME% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
                     echo environment: %DEPLOY_ENV% >> "C:\\inetpub\\wwwroot\\baay-soose.github.io\\newrelic.yml"
-                    
-                    echo Déploiement direct terminé avec succès!
+            
+                    echo DÃ©ploiement direct terminÃ© avec succÃ¨s!
                 '''
             }
         }
         
         stage('Verify Deployment') {
             steps {
-                echo 'Vérification du déploiement...'
+                echo 'VÃ©rification du dÃ©ploiement...'
                 bat '''
-                    echo Vérification de l'existence des fichiers déployés...
+                    echo VÃ©rification de l'existence des fichiers dÃ©ployÃ©s...
                     if exist "C:\\inetpub\\wwwroot\\baay-soose.github.io\\index.html" (
-                        echo Déploiement vérifié avec succès!
+                        echo DÃ©ploiement vÃ©rifiÃ© avec succÃ¨s!
                     ) else (
-                        echo AVERTISSEMENT: Le déploiement n'a pas pu être vérifié.
-                        echo Le répertoire ou le fichier index.html n'existe pas.
+                        echo AVERTISSEMENT: Le dÃ©ploiement n'a pas pu Ãªtre vÃ©rifiÃ©.
+                        echo Le rÃ©pertoire ou le fichier index.html n'existe pas.
                     )
                 '''
             }
@@ -248,25 +275,25 @@ pipeline {
     
     post {
         success {
-            echo 'Pipeline exécuté avec succès !'
+            echo 'Pipeline exÃ©cutÃ© avec succÃ¨s !'
             
-            // Notification en cas de succès
+            // Notification en cas de succÃ¨s
             script {
                 if (env.DEPLOY_ENV == 'production') {
-                    echo "Application déployée avec succès en PRODUCTION"
-                    echo "Notification de déploiement envoyée à New Relic"
+                    echo "Application dÃ©ployÃ©e avec succÃ¨s en PRODUCTION"
+                    echo "Notification de dÃ©ploiement envoyÃ©e Ã  New Relic"
                 } else {
-                    echo "Application déployée avec succès en STAGING"
+                    echo "Application dÃ©ployÃ©e avec succÃ¨s en STAGING"
                 }
             }
         }
         
         failure {
-            echo 'Pipeline échoué !'
+            echo 'Pipeline Ã©chouÃ© !'
             
-            // Notification en cas d'échec
+            // Notification en cas d'Ã©chec
             script {
-                echo "Échec du pipeline CI/CD"
+                echo "Ã‰chec du pipeline CI/CD"
             }
         }
         

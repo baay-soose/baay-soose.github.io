@@ -194,28 +194,54 @@ pipeline {
             }
         }
 
+
         stage('Integrate Dynatrace Monitoring') {
     steps {
         echo 'Intégration de Dynatrace RUM pour la surveillance...'
-        bat '''
-            rem Création d'un script de surveillance Dynatrace
-            echo // Dynatrace RUM Monitoring > js\\dynatrace-rum.js
-            echo // Remplacez ce contenu par le code JavaScript fourni par Dynatrace >> js\\dynatrace-rum.js
-            echo (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': >> js\\dynatrace-rum.js
-            echo new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], >> js\\dynatrace-rum.js
-            echo j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= >> js\\dynatrace-rum.js
-            echo 'https://your-environment-id.live.dynatrace.com/js/your-app-id.js'+dl;f.parentNode.insertBefore(j,f); >> js\\dynatrace-rum.js
-            echo })(window,document,'script','dataLayer','YOUR-APP-ID'); >> js\\dynatrace-rum.js
+        powershell '''
+            # Création d'un script de surveillance Dynatrace avec PowerShell
+            $dynatraceJs = @"
+// Dynatrace RUM Monitoring
+// Remplacez ce contenu par le code JavaScript fourni par Dynatrace
+(function(w,d,s,l,i){
+    w[l]=w[l]||[];
+    w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;
+    j.src='https://your-environment-id.live.dynatrace.com/js/your-app-id.js'+dl;
+    f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','YOUR-APP-ID');
+"@
+
+            # Créer le dossier js si nécessaire
+            if (-not (Test-Path "js")) {
+                New-Item -Path "js" -ItemType Directory -Force
+            }
             
-            rem Copier vers dist/js
-            if not exist dist\\js mkdir dist\\js
-            xcopy /y js\\dynatrace-rum.js dist\\js\\
+            # Écrire le contenu dans le fichier
+            Set-Content -Path "js/dynatrace-rum.js" -Value $dynatraceJs
             
-            rem Injecter le script dans les fichiers HTML
-            powershell -Command "foreach ($file in Get-ChildItem dist\\*.html) { $content = Get-Content $file -Raw; $insertion = '<script src=\"js/dynatrace-rum.js\"></script>'; $newContent = $content -replace '(<head>)', '$1' + \"`n  $insertion\"; Set-Content $file $newContent }"
+            # Créer le dossier dist/js si nécessaire
+            if (-not (Test-Path "dist/js")) {
+                New-Item -Path "dist/js" -ItemType Directory -Force
+            }
+            
+            # Copier le fichier vers dist/js
+            Copy-Item -Path "js/dynatrace-rum.js" -Destination "dist/js" -Force
+            
+            # Injecter le script dans les fichiers HTML
+            foreach ($file in Get-ChildItem dist/*.html) {
+                $content = Get-Content $file -Raw
+                $insertion = '<script src="js/dynatrace-rum.js"></script>'
+                $newContent = $content -replace '(<head>)', "$1`n  $insertion"
+                Set-Content $file $newContent
+            }
         '''
     }
 }
+
+
         
         stage('Archive Build') {
             steps {

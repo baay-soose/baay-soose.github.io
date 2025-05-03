@@ -83,43 +83,68 @@ pipeline {
                     if not exist package.json (
                         npm init -y
                     )
+
+                    rem Configurer Chrome pour les tests en mode headless
+                    echo Configuration de Chrome en mode headless pour Jenkins...
+                    set HEADLESS=true
                 '''
             }
         }
         
         stage('Run Selenium Tests') {
-            steps {
-                echo 'Exécution des tests Selenium...'
-                bat '''
-                    rem Définir le port pour les tests
-                    set TEST_PORT=8081
-                    
-                    rem Créer le répertoire pour les résultats des tests
-                    if not exist test-results mkdir test-results
-                    
-                    rem Créer le répertoire pour les captures d'écran
-                    if not exist screenshots mkdir screenshots
-                    
-                    rem Vérifier que Node.js est disponible
-                    node --version
-                    
-                    rem Exécuter les tests avec le script runAllTests.js
-                    node tests/selenium/runAllTests.js || echo "Échec des tests Selenium"
-                '''
-            }
-            post {
-                always {
-                    // Archiver les résultats des tests
-                    junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
-                    
-                    // Archiver les captures d'écran si présentes
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'screenshots/**/*.png'
-                    
-                    // Archiver les logs détaillés
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'test-results/*.txt'
-                }
-            }
+    steps {
+        echo 'Exécution des tests Selenium...'
+        bat '''
+            rem Définir le port pour les tests
+            set TEST_PORT=8081
+            
+            rem Créer le répertoire pour les résultats des tests
+            if not exist test-results mkdir test-results
+            
+            rem Créer le répertoire pour les captures d'écran
+            if not exist screenshots mkdir screenshots
+            
+            rem Vérifier que Node.js est disponible
+            node --version
+            
+            rem Vérifier que Chrome est disponible
+            echo Vérification de Chrome...
+            if exist "%CHROME_PATH%\\chrome.exe" (
+                echo Chrome trouvé dans %CHROME_PATH%
+            ) else (
+                echo Chrome non trouvé dans %CHROME_PATH%
+                echo Recherche dans le PATH...
+                where chrome || echo Chrome introuvable dans le PATH
+            )
+            
+            rem Installer ChromeDriver si nécessaire
+            npm install chromedriver --save-dev
+            
+            rem Afficher la version de ChromeDriver
+            npx chromedriver --version
+            
+            rem Exécuter uniquement le test de navigation et formulaire
+            echo Exécution du test navigationAndFormTest.js...
+            npx mocha tests/selenium/navigationAndFormTest.js --timeout 30000 --reporter mocha-junit-reporter --reporter-options mochaFile=test-results/selenium-junit.xml || echo "Échec des tests Selenium"
+            
+            rem Afficher le contenu du dossier screenshots après les tests
+            echo Captures d'écran générées :
+            dir /b screenshots
+        '''
+    }
+    post {
+        always {
+            // Archiver les résultats des tests
+            junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
+            
+            // Archiver les captures d'écran si présentes
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'screenshots/**/*.png'
+            
+            // Archiver les logs détaillés
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'test-results/*.txt'
         }
+    }
+}
         
         stage('Build for Production') {
     steps {

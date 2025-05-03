@@ -1,4 +1,3 @@
-// tests/selenium/formTest.js
 const { By, until } = require('selenium-webdriver');
 const BaseTest = require('./baseTest');
 const assert = require('assert');

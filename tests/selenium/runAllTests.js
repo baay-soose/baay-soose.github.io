@@ -1,4 +1,3 @@
-// tests/selenium/runAllTests.js
 const Mocha = require('mocha');
 const path = require('path');
 const fs = require('fs');
@@ -43,20 +42,17 @@ const server = spawn('node', [path.join(__dirname, 'startServer.js')], {
 
 // Attendre que le serveur démarre
 setTimeout(() => {
-    // Ajouter tous les fichiers de test SAUF formTest.js
+    // Ajouter UNIQUEMENT le nouveau test navigationAndFormTest.js
     const testDir = path.join(__dirname);
-    fs.readdirSync(testDir)
-        .filter(file => {
-            return file.endsWith('Test.js') &&
-                !file.startsWith('base') &&
-                !file.startsWith('config') &&
-                !file.startsWith('run') &&
-                 file !== 'formTest.js'; // Exclure formTest.js
-        })
-        .forEach(file => {
-            console.log(`Ajout du test: ${file}`);
-            mocha.addFile(path.join(testDir, file));
-        });
+    const navigationAndFormTestFile = path.join(testDir, 'navigationAndFormTest.js');
+
+    if (fs.existsSync(navigationAndFormTestFile)) {
+        console.log(`Ajout du test: navigationAndFormTest.js`);
+        mocha.addFile(navigationAndFormTestFile);
+    } else {
+        console.error(`Le fichier navigationAndFormTest.js n'existe pas dans ${testDir}`);
+        process.exit(1);
+    }
 
     // Afficher la configuration des tests
     console.log('=================================');

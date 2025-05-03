@@ -1,12 +1,11 @@
-// tests/selenium/config.js
 module.exports = {
     baseUrl: process.env.BASE_URL || `http://localhost:${process.env.TEST_PORT || 8081}`,
     timeout: 60000,  // Augmenté à 60 secondes
-    headless: process.env.HEADLESS === 'true',
+    headless: process.env.HEADLESS === 'true' || !!process.env.JENKINS_HOME || !!process.env.BUILD_ID,
     port: process.env.TEST_PORT || 8081,
     windowSize: {
-        width: 1920,
-        height: 1080
+        width: 1024,
+        height: 720
     },
     chromeOptions: function () {
         const options = [];

@@ -139,17 +139,17 @@ Pour exécuter le pipeline manuellement :
    cp -r *.html *.css *.js images fonts dist/
    ```
 
-5. Installez Ansible et déployez :
+5. déployez local  :
    ```bash
-   pip install ansible
-   ansible-playbook -i ansible/inventory.ini ansible/deploy-website.yml
+    Déploiement direct de l'application.
+        
    ```
 
 ### Accès à l'application
 
 Une fois déployée, l'application est accessible à l'adresse :
 - http://localhost/ (si déployé localement)
-- http://your-server-ip/ (si déployé sur un serveur distant)
+- 
 
 ### Accès à New Relic
 

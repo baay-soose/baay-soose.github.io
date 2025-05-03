@@ -1,4 +1,3 @@
-// tests/selenium/mocha.config.js
 module.exports = {
     reporter: 'mocha-junit-reporter',
     reporterOptions: {

@@ -1,4 +1,3 @@
-// tests/selenium/baseTest.js
 const { Builder, Browser, Capabilities } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const assert = require('assert');
@@ -19,6 +18,15 @@ class BaseTest {
         try {
             const options = new chrome.Options();
 
+            // Forcer le mode headless sur Jenkins
+            const isJenkins = process.env.JENKINS_HOME || process.env.BUILD_ID;
+            if (isJenkins) {
+                console.log('Détection de Jenkins - Activation du mode headless');
+                options.addArguments('--headless');
+                options.addArguments('--disable-gpu');
+                options.addArguments('--window-size=1936,1048');
+            }
+
             // Options spécifiques pour Jenkins/Windows
             config.chromeOptions().forEach(arg => {
                 console.log(`Ajout de l'option Chrome: ${arg}`);
@@ -29,9 +37,9 @@ class BaseTest {
             options.addArguments('--disable-infobars');
             options.addArguments('--ignore-certificate-errors');
             options.addArguments('--start-maximized');
-            options.addArguments('--disable-gpu');
             options.addArguments('--no-sandbox');
             options.addArguments('--disable-setuid-sandbox');
+            options.addArguments('--remote-debugging-port=9222')
 
             // Pour Jenkins, spécifier explicitement les chemins si nécessaire
             if (process.env.CHROMEDRIVER_PATH) {

@@ -3,44 +3,52 @@
   "WorkspaceRootPath": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\navigationAndFormTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\navigationAndFormTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\runAllTests.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\runAllTests.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\homePageTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\homePageTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\formTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\formTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\baseTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\baseTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\startServer.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\startServer.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\js\\newrelic-monitoring.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:js\\newrelic-monitoring.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\newrelic-infra.yml.j2||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ansible\\templates\\newrelic-infra.yml.j2||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\install-newrelic.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ansible\\install-newrelic.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\inventory.ini||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ansible\\inventory.ini||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\Jenkinsfile||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Jenkinsfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\deploy-website.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ansible\\deploy-website.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\contactform\\contactform.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:contactform\\contactform.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\runAllTests.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\runAllTests.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\navigationTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\navigationTest.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\nginx-site.conf.j2||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -51,8 +59,36 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ansible\\templates\\newrelic.js.j2||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\newrelic-infra.yml.j2||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ansible\\templates\\newrelic-infra.yml.j2||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\deploy-website.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ansible\\deploy-website.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\inventory.ini||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ansible\\inventory.ini||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\install-newrelic.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ansible\\install-newrelic.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\mocha.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\selenium\\mocha.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\deploy.sh||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:deploy.sh||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\js\\newrelic-monitoring.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:js\\newrelic-monitoring.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,7 +98,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,99 +110,97 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "package.json",
-              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\package.json",
-              "RelativeDocumentMoniker": "package.json",
-              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\package.json",
-              "RelativeToolTip": "package.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-21T20:32:48.836Z",
+              "DocumentIndex": 5,
+              "Title": "baseTest.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\baseTest.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\baseTest.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\baseTest.js",
+              "RelativeToolTip": "tests\\selenium\\baseTest.js",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAywAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-03T18:16:52.267Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "README.md",
-              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\README.md",
-              "RelativeDocumentMoniker": "README.md",
-              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\README.md",
-              "RelativeToolTip": "README.md",
-              "ViewState": "AgIAAIEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-04-21T20:09:09.138Z",
+              "DocumentIndex": 0,
+              "Title": "navigationAndFormTest.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\navigationAndFormTest.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\navigationAndFormTest.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\navigationAndFormTest.js",
+              "RelativeToolTip": "tests\\selenium\\navigationAndFormTest.js",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAAAF8AAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-03T18:15:34.024Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
+              "Title": "contactform.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\contactform\\contactform.js",
+              "RelativeDocumentMoniker": "contactform\\contactform.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\contactform\\contactform.js",
+              "RelativeToolTip": "contactform\\contactform.js",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-03T16:52:40.259Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "homePageTest.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\homePageTest.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\homePageTest.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\homePageTest.js",
+              "RelativeToolTip": "tests\\selenium\\homePageTest.js",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAH8AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-23T00:52:03.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\index.html",
+              "RelativeDocumentMoniker": "index.html",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\index.html",
+              "RelativeToolTip": "index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAChAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-04-20T12:05:46.664Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "runAllTests.js",
               "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\runAllTests.js",
               "RelativeDocumentMoniker": "tests\\selenium\\runAllTests.js",
               "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\runAllTests.js",
               "RelativeToolTip": "tests\\selenium\\runAllTests.js",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAADYAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAIwEsAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-21T16:31:09.794Z"
+              "WhenOpened": "2025-04-21T16:31:09.794Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "newrelic-monitoring.js",
-              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\js\\newrelic-monitoring.js",
-              "RelativeDocumentMoniker": "js\\newrelic-monitoring.js",
-              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\js\\newrelic-monitoring.js",
-              "RelativeToolTip": "js\\newrelic-monitoring.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-21T15:32:03.476Z",
-              "EditorCaption": ""
+              "DocumentIndex": 17,
+              "Title": "install-newrelic.yml",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\install-newrelic.yml",
+              "RelativeDocumentMoniker": "ansible\\install-newrelic.yml",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\install-newrelic.yml",
+              "RelativeToolTip": "ansible\\install-newrelic.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-04-21T14:13:41.559Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "deploy.sh",
-              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\deploy.sh",
-              "RelativeDocumentMoniker": "deploy.sh",
-              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\deploy.sh",
-              "RelativeToolTip": "deploy.sh",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-04-21T15:27:26.129Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "newrelic.js.j2",
-              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\newrelic.js.j2",
-              "RelativeDocumentMoniker": "ansible\\templates\\newrelic.js.j2",
-              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\newrelic.js.j2",
-              "RelativeToolTip": "ansible\\templates\\newrelic.js.j2",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-04-21T14:18:29.803Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "newrelic-infra.yml.j2",
-              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\newrelic-infra.yml.j2",
-              "RelativeDocumentMoniker": "ansible\\templates\\newrelic-infra.yml.j2",
-              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\newrelic-infra.yml.j2",
-              "RelativeToolTip": "ansible\\templates\\newrelic-infra.yml.j2",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-04-21T14:17:42.894Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
               "Title": "nginx-site.conf.j2",
               "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\nginx-site.conf.j2",
               "RelativeDocumentMoniker": "ansible\\templates\\nginx-site.conf.j2",
@@ -178,7 +212,58 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAABQAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-04-21T20:09:09.138Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "formTest.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\formTest.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\formTest.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\formTest.js",
+              "RelativeToolTip": "tests\\selenium\\formTest.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-23T00:51:57.787Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "startServer.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\startServer.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\startServer.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\startServer.js",
+              "RelativeToolTip": "tests\\selenium\\startServer.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-23T00:52:30.339Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "config.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\config.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\config.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\config.js",
+              "RelativeToolTip": "tests\\selenium\\config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-23T00:51:51.044Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "inventory.ini",
               "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\inventory.ini",
               "RelativeDocumentMoniker": "ansible\\inventory.ini",
@@ -186,25 +271,60 @@
               "RelativeToolTip": "ansible\\inventory.ini",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002768|",
-              "WhenOpened": "2025-04-21T14:16:14.565Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-21T14:16:14.565Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "install-newrelic.yml",
-              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\install-newrelic.yml",
-              "RelativeDocumentMoniker": "ansible\\install-newrelic.yml",
-              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\install-newrelic.yml",
-              "RelativeToolTip": "ansible\\install-newrelic.yml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2025-04-21T14:13:41.559Z",
-              "EditorCaption": ""
+              "DocumentIndex": 13,
+              "Title": "newrelic.js.j2",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\newrelic.js.j2",
+              "RelativeDocumentMoniker": "ansible\\templates\\newrelic.js.j2",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\newrelic.js.j2",
+              "RelativeToolTip": "ansible\\templates\\newrelic.js.j2",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-21T14:18:29.803Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "navigationTest.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\navigationTest.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\navigationTest.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\navigationTest.js",
+              "RelativeToolTip": "tests\\selenium\\navigationTest.js",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-23T00:52:14.283Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "Jenkinsfile",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\Jenkinsfile",
+              "RelativeDocumentMoniker": "Jenkinsfile",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\Jenkinsfile",
+              "RelativeToolTip": "Jenkinsfile",
+              "ViewState": "AgIAACABAAAAAAAAAAAAADMBAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-20T11:36:17.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "newrelic-infra.yml.j2",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\newrelic-infra.yml.j2",
+              "RelativeDocumentMoniker": "ansible\\templates\\newrelic-infra.yml.j2",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\templates\\newrelic-infra.yml.j2",
+              "RelativeToolTip": "ansible\\templates\\newrelic-infra.yml.j2",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-21T14:17:42.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "deploy-website.yml",
               "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\ansible\\deploy-website.yml",
               "RelativeDocumentMoniker": "ansible\\deploy-website.yml",
@@ -212,34 +332,59 @@
               "RelativeToolTip": "ansible\\deploy-website.yml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2025-04-21T14:12:44.837Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-21T14:12:44.837Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "index.html",
-              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\index.html",
-              "RelativeDocumentMoniker": "index.html",
-              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\index.html",
-              "RelativeToolTip": "index.html",
-              "ViewState": "AgIAAOEAAAAAAAAAAAAAAP0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-04-20T12:05:46.664Z",
-              "EditorCaption": ""
+              "DocumentIndex": 18,
+              "Title": "mocha.config.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\mocha.config.js",
+              "RelativeDocumentMoniker": "tests\\selenium\\mocha.config.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\tests\\selenium\\mocha.config.js",
+              "RelativeToolTip": "tests\\selenium\\mocha.config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-23T00:52:08.451Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Jenkinsfile",
-              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\Jenkinsfile",
-              "RelativeDocumentMoniker": "Jenkinsfile",
-              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\Jenkinsfile",
-              "RelativeToolTip": "Jenkinsfile",
-              "ViewState": "AgIAAOcAAAAAAAAAAAAYwBQBAAABAAAAAAAAAA==",
+              "DocumentIndex": 19,
+              "Title": "deploy.sh",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\deploy.sh",
+              "RelativeDocumentMoniker": "deploy.sh",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\deploy.sh",
+              "RelativeToolTip": "deploy.sh",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-04-20T11:36:17.296Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-21T15:27:26.129Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "newrelic-monitoring.js",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\js\\newrelic-monitoring.js",
+              "RelativeDocumentMoniker": "js\\newrelic-monitoring.js",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\js\\newrelic-monitoring.js",
+              "RelativeToolTip": "js\\newrelic-monitoring.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-21T15:32:03.476Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\package.json",
+              "RelativeDocumentMoniker": "package.json",
+              "ToolTip": "C:\\Users\\Utilisateur\\source\\repos\\baay-soose.github.io\\package.json",
+              "RelativeToolTip": "package.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-21T20:32:48.836Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             }
           ]
         }

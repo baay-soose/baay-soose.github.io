@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ansible",
-    "\\ansible\\templates"
+    "\\tests",
+    "\\tests\\selenium"
   ],
-  "SelectedNode": "\\index.html",
+  "SelectedNode": "\\tests\\selenium\\navigationAndFormTest.js",
   "PreviewInSolutionExplorer": false
 }

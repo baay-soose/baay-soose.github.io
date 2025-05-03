@@ -1,0 +1,146 @@
+{
+  "id": "017b50d1-a5b9-4199-93ef-3a800361e59a",
+  "version": "2.0",
+  "name": "test-siteweb",
+  "url": "https://baay-soose.github.io/",
+  "tests": [{
+    "id": "d3372ea0-a2cd-4fd8-b924-0f5cb8753494",
+    "name": "baaysoose",
+    "commands": [{
+      "id": "51c22b61-4e0c-4fa2-9b3b-55e2a664c7bd",
+      "comment": "",
+      "command": "open",
+      "target": "https://baay-soose.github.io/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "afe499f9-0656-48a3-be36-8c67aaea66d4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "87395be2-d3e6-477a-8dd0-0392cd0d8186",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(2) > a",
+      "targets": [
+        ["css=li:nth-child(2) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Nos Services')]", "xpath:link"],
+        ["xpath=//div[@id='myNavbar']/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#feature')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "32409125-387a-425f-9574-2c7761a1b94f",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(3) > a",
+      "targets": [
+        ["css=li:nth-child(3) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Nos travaux')]", "xpath:link"],
+        ["xpath=//div[@id='myNavbar']/ul/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#portfolio')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "065766a8-db06-4d4e-a049-b546353ff55a",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(4) > a",
+      "targets": [
+        ["css=li:nth-child(4) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Contactez-nous')]", "xpath:link"],
+        ["xpath=//div[@id='myNavbar']/ul/li[4]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#contact')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0a51a678-e047-423c-9e97-5db87203410e",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(3) > a",
+      "targets": [
+        ["css=li:nth-child(3) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Nos travaux')]", "xpath:link"],
+        ["xpath=//div[@id='myNavbar']/ul/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#portfolio')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e4d610d4-ba71-497b-a099-e096523b740d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Code source",
+      "targets": [
+        ["linkText=Code source", "linkText"],
+        ["css=.sub-title > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Code source')]", "xpath:link"],
+        ["xpath=//section[@id='portfolio']/div/div/div/p/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://github.com/baay-soose/ProjetPython/tree/master/DOCS')]", "xpath:href"],
+        ["xpath=//p/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Code source')]", "xpath:innerText"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win9819",
+      "windowTimeout": 2000
+    }, {
+      "id": "16f63675-2c1e-4a92-beed-928da3fd2019",
+      "comment": "",
+      "command": "storeWindowHandle",
+      "target": "root",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "31020cb5-c0d5-47ac-908f-913c413bffbe",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win9819}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7bca44ec-93d9-467f-b0e6-4da666f2fb8b",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5e19ce76-aaa9-4659-91fe-c3d93258e2ce",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "88a0d839-6b1d-4f46-ad02-8e63c66aa1d7",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(4) > a",
+      "targets": [
+        ["css=li:nth-child(4) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Contactez-nous')]", "xpath:link"],
+        ["xpath=//div[@id='myNavbar']/ul/li[4]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#contact')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "4c5deaa0-a7b5-466e-8b6d-47fea26177e9",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["d3372ea0-a2cd-4fd8-b924-0f5cb8753494"]
+  }],
+  "urls": ["https://baay-soose.github.io/"],
+  "plugins": []
+}

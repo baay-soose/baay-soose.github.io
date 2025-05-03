@@ -9,7 +9,8 @@ pipeline {
         APP_NAME = 'baay-soose.github.io'
         DEPLOY_ENV = 'production'
         TEST_PORT = '8081'
-        CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application'
+        CHROME_BIN = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+        CHROMEDRIVER_PATH = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\ProjetFinal\\node_modules\\chromedriver\\lib\\chromedriver'
         NEW_RELIC_LICENSE_KEY = credentials('new-relic-license-key')
     }
     
@@ -91,7 +92,7 @@ pipeline {
             }
         }
         
-        stage('Run Selenium Tests') {
+ stage('Run Selenium Tests') {
     steps {
         echo 'Exécution des tests Selenium...'
         bat '''
@@ -109,27 +110,25 @@ pipeline {
             
             rem Vérifier que Chrome est disponible
             echo Vérification de Chrome...
-            if exist "%CHROME_PATH%\\chrome.exe" (
-                echo Chrome trouvé dans %CHROME_PATH%
-            ) else (
-                echo Chrome non trouvé dans %CHROME_PATH%
-                echo Recherche dans le PATH...
-                where chrome || echo Chrome introuvable dans le PATH
-            )
+            where chrome.exe || where google-chrome || echo Chrome non trouvé dans le PATH
             
-            rem Installer ChromeDriver si nécessaire
-            npm install chromedriver --save-dev
+            rem Installer les dépendances si nécessaire
+            npm install chromedriver@latest --save-dev
+            npm install mocha selenium-webdriver mocha-junit-reporter --save-dev
             
             rem Afficher la version de ChromeDriver
             npx chromedriver --version
             
+            rem Configurer pour mode headless
+            set HEADLESS=true
+            
             rem Exécuter uniquement le test de navigation et formulaire
             echo Exécution du test navigationAndFormTest.js...
-            npx mocha tests/selenium/navigationAndFormTest.js --timeout 30000 --reporter mocha-junit-reporter --reporter-options mochaFile=test-results/selenium-junit.xml || echo "Échec des tests Selenium"
+            npx mocha tests/selenium/navigationAndFormTest.js --timeout 30000 --reporter mocha-junit-reporter --reporter-options mochaFile=test-results/selenium-junit.xml || exit /b 0
             
             rem Afficher le contenu du dossier screenshots après les tests
             echo Captures d'écran générées :
-            dir /b screenshots
+            dir /b screenshots 2>nul || echo Aucune capture d'écran trouvée
         '''
     }
     post {

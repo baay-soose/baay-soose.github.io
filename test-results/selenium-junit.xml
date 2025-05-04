@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="18.939" tests="1" failures="0">
-  <testsuite name="Root Suite" timestamp="2025-05-03T22:23:04" tests="0" time="0.000" failures="0">
+<testsuites name="Mocha Tests" time="25.361" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2025-05-04T01:03:51" tests="0" time="0.000" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
   </testsuite>
-  <testsuite name="Tests de navigation et formulaire de contact" timestamp="2025-05-03T22:23:04" tests="1" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\navigationAndFormTest.js" time="18.938" failures="0">
+  <testsuite name="Tests de navigation et formulaire de contact" timestamp="2025-05-04T01:03:51" tests="1" file="C:\Users\Utilisateur\source\repos\baay-soose.github.io\tests\selenium\navigationAndFormTest.js" time="25.359" failures="0">
     <properties>
       <property name="BUILD_NUMBER" value="local-build"/>
       <property name="JOB_NAME" value="selenium-tests"/>
     </properties>
-    <testcase name="Tests de navigation et formulaire de contact devrait cliquer sur tous les liens de navigation" time="16.530" classname="devrait cliquer sur tous les liens de navigation">
+    <testcase name="Tests de navigation et formulaire de contact devrait cliquer sur tous les liens de navigation" time="24.146" classname="devrait cliquer sur tous les liens de navigation">
     </testcase>
   </testsuite>
 </testsuites>
